@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Lending"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_lending"
+        android:id="@+id/dashboardMenuItem"
+        />
+    <item
+        android:title="Marketplace"
+        app:showAsAction="always"
+        android:id="@+id/marketplacedMenuItem"
+        android:icon="@drawable/ic_marketplace"
+        />
+    <item
+        android:title="Profile"
+        app:showAsAction="always"
+        android:id="@+id/profileMenuItem"
+        android:icon="@drawable/ic_profile"
+        />
+</menu>
