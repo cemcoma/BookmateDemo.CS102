@@ -20,4 +20,9 @@
         android:id="@+id/profileMenuItem"
         android:icon="@drawable/ic_profile"
         />
+    <item
+        android:title="Chat"
+        app:showAsAction="always"
+        android:id="@+id/chatMenuItem"
+        android:icon="@drawable/ic_chat" />
 </menu>

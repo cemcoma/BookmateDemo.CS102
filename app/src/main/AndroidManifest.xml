@@ -15,9 +15,6 @@
             android:name=".activities.addListingActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.chatActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.dashboardActivity"
             android:exported="false" />
         <activity

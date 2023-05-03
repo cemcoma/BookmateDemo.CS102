@@ -14,6 +14,7 @@ import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.fragments.dashboardFragment;
 import com.cemcoma.myapplication.fragments.marketplaceFragment;
 import com.cemcoma.myapplication.fragments.profileFragment;
+import com.cemcoma.myapplication.fragments.chatFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class dashboardActivity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class dashboardActivity extends AppCompatActivity {
     private dashboardFragment dashFragment;
     private marketplaceFragment marketFragment;
     private profileFragment profileFragment;
+    private chatFragment chatFragment;
 
 
     @Override
@@ -33,6 +35,7 @@ public class dashboardActivity extends AppCompatActivity {
         dashFragment = new dashboardFragment();
         marketFragment = new marketplaceFragment();
         profileFragment = new profileFragment();
+        chatFragment = new chatFragment();
 
         setFragment(dashFragment);
 
@@ -52,6 +55,9 @@ public class dashboardActivity extends AppCompatActivity {
                         return true;
                     case (R.id.dashboardMenuItem):
                         setFragment(dashFragment);
+                        return true;
+                    case (R.id.chatMenuItem):
+                        setFragment(chatFragment);
                         return true;
                 }
                 return false;
