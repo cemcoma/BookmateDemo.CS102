@@ -4,52 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.marketplaceFragment">
+    tools:context=".fragments.marketplaceFragment" >
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Listings"
-
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="@+id/imageView4" />
+    <ImageButton
+        android:id="@+id/searchButtonMp"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_marketplace"
+        app:layout_constraintBottom_toBottomOf="@+id/searchBarMp"
+        app:layout_constraintEnd_toEndOf="@+id/searchBarMp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/searchBarMp"
         android:layout_width="216dp"
         android:layout_height="51dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Enter a book name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="52dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_marketplace"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="401dp"
-        android:layout_height="348dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:text="Listings"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/searchBarMp"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/listing21" />
+        app:layout_constraintTop_toBottomOf="@+id/searchBarMp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerViewMp"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

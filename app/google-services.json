@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1014897177217",
+    "project_id": "bookmate-1",
+    "storage_bucket": "bookmate-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014897177217:android:8a2e61bc19e14408821380",
+        "android_client_info": {
+          "package_name": "com.cemcoma.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014897177217-mmd3im5ap3tt19tu4ha0vov7me6b7cji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsbSrM8XBg3734aBSGbHlksmigF1zcBUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014897177217-mmd3im5ap3tt19tu4ha0vov7me6b7cji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014897177217:android:0cca9d2c6beffc34821380",
+        "android_client_info": {
+          "package_name": "com.hakedismuns.bookmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014897177217-mmd3im5ap3tt19tu4ha0vov7me6b7cji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsbSrM8XBg3734aBSGbHlksmigF1zcBUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014897177217-mmd3im5ap3tt19tu4ha0vov7me6b7cji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
