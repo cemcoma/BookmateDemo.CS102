@@ -1,17 +1,20 @@
 package com.cemcoma.myapplication.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cemcoma.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,14 +24,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class userLoginActivity extends AppCompatActivity {
+public class userRegisterActivity extends AppCompatActivity {
 
     TextInputEditText editEmailText , editPasswordText;
-    Button buttonLogin;
-    FirebaseAuth mAuth;
-    ProgressBar progressBar;
-    TextView login_to_register;
     private static final String TAG = "EmailPassword";
+    Button buttonReg;
+
+    FirebaseAuth mAuth;
+
+    ProgressBar progressBar;
+
+    TextView register_to_login;
 
     //Checking if a user is currently logged in --
     // from Firebase documentation https://firebase.google.com/docs/auth/android/password-auth?hl=en&authuser=0#java_6
@@ -41,20 +47,20 @@ public class userLoginActivity extends AppCompatActivity {
             updateUI(currentUser);
         }
     }
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_login);
+        setContentView(R.layout.activity_user_register);
 
         editEmailText = findViewById(R.id.email);
         editPasswordText = findViewById(R.id.password);
-        buttonLogin = findViewById(R.id.loginButton);
-        progressBar = findViewById(R.id.loginProgressBar);
-        login_to_register = findViewById(R.id.registerNow);
-        mAuth = FirebaseAuth.getInstance();
+        buttonReg = findViewById(R.id.registerButton);
+        progressBar = findViewById(R.id.registerProgressBar);
+        register_to_login = findViewById(R.id.loginNow);
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        mAuth = FirebaseAuth.getInstance();
+        buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -64,32 +70,33 @@ public class userLoginActivity extends AppCompatActivity {
                 password = String.valueOf(editPasswordText.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(userLoginActivity.this , "Email cannot be empty!" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(userRegisterActivity.this , "Email cannot be empty!" , Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(userLoginActivity.this , "Password cannot be empty!" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(userRegisterActivity.this , "Password cannot be empty!" , Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
-                //From Firebase documentation -- https://firebase.google.com/docs/auth/android/password-auth?hl=en&authuser=0#java_6
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(userLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                //Registering a new user -- From Firebase documentation https://firebase.google.com/docs/auth/android/password-auth?hl=en&authuser=0#java_1
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(userRegisterActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
+
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
+                                    Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Toast.makeText(userLoginActivity.this, "Login successful.",
+                                    Toast.makeText(userRegisterActivity.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
                                     updateUI(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(userLoginActivity.this, "Authentication failed.",
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(userRegisterActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                     updateUI(null);
                                 }
@@ -98,10 +105,18 @@ public class userLoginActivity extends AppCompatActivity {
             }
         });
 
-        login_to_register.setOnClickListener(new View.OnClickListener() {
+        register_to_login.setOnHoverListener(new View.OnHoverListener() {
+            @Override
+            public boolean onHover(View v, MotionEvent event){
+
+                register_to_login.setTextColor(getResources().getColor(R.color.purple_200 , getTheme()));
+                return true;
+            }
+        });
+        register_to_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , userRegisterActivity.class);
+                Intent intent = new Intent(getApplicationContext() , userLoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -112,6 +127,6 @@ public class userLoginActivity extends AppCompatActivity {
         if (user == null) {
             return;
         }
-        //TODO after the implementation of marketplace
+        //TODO after implementation of marketplace
     }
 }
