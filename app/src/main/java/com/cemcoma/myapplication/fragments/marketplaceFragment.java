@@ -1,10 +1,15 @@
 package com.cemcoma.myapplication.fragments;
 
+import com.cemcoma.myapplication.RecylerviewInterface;
 import com.cemcoma.myapplication.listings.*;
+import com.cemcoma.myapplication.activities.addListingActivity;
+
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,15 +32,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class marketplaceFragment extends Fragment implements View.OnClickListener { //Mp = Marketplace
+public class marketplaceFragment extends Fragment implements View.OnClickListener, RecylerviewInterface { //Mp = Marketplace
     private ImageButton[] imageButtonArr;
     private String[] imageUrlArr;
     private Uri[] imageUriArr;
-    private ImageButton searchButton;
+    private ImageButton searchButton, addListingButton;
     private RecyclerView recyclerView;
     private EditText searchBar;
     private FirebaseStorage mStorage;
     private FirebaseFirestore mFirestore;
+    private  List<listingMp> listing;
+    private Uri imageUri;
 
 
 
@@ -43,91 +50,53 @@ public class marketplaceFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_marketplace, container, false);
 
-        recyclerView =(RecyclerView) v.findViewById(R.id.recyclerviewMp);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerviewMp);
         searchBar = (EditText) v.findViewById(R.id.searchBarMp);
         searchButton = (ImageButton) v.findViewById(R.id.searchButtonMp);
+        addListingButton = (ImageButton) v.findViewById(R.id.addListingButton);
         searchButton.setOnClickListener(this);
+        addListingButton.setOnClickListener(this);
 
-        List<listingMp> listing = new ArrayList<>();
-        listing.add(new listingMp("cemcoma","cem","coma",10,4.4,10));
-        listing.add(new listingMp("cemcoma","cem1","coma1",11,3.4,10));
-        listing.add(new listingMp("cemcoma","cem2","coma2",12,2.4,10));
+        listing = new ArrayList<>();
+        listing.add(new listingMp("Biologic Calculus", "Campbell", "Efeler", 20, 4.2, "zort"));
+
+
 
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerviewMp);
         recyclerView.setLayoutManager(new LinearLayoutManager(super.getContext()));
-        recyclerView.setAdapter(new mpAdapter(super.getContext(), listing));
+
 
         mStorage = FirebaseStorage.getInstance(); //photolar burada kaydolcak
         mFirestore = FirebaseFirestore.getInstance();
 
-        /*
-        initialListings(v, new callback() {
-            int i = 0;
-            @Override
-            public void callbackString(String callbackString) {
-                imageUrlArr[i] = callbackString;
-                i++;
-                if(i == 1) {
-                    createButtons(i, v);
-                }
-            }
-        });
-        */
 
+        recyclerView.setAdapter(new mpAdapter(super.getContext(), listing, this));
         return v;
     }
 
-    private void initialListings(View v, final callback callback) {
-        imageButtonArr = new ImageButton[1];
-        imageUrlArr = new String[imageButtonArr.length];
-        mFirestore.collection("mp-listings").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int i = 0;
-                for(DocumentSnapshot docSnap : queryDocumentSnapshots) {
-                   if(i < imageUrlArr.length) {
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == addListingButton.getId()) {
+            Intent intent = new Intent(getActivity() , addListingActivity.class);
+            startActivity(intent);
+        } else if(view.getId() == searchButton.getId()) {
+            //TODO: Listingleri searchbar a göre koyacan yeni list yap filan
+            //TODO: alltaki örnek ve çalışıyor yey
+            listing.add(new listingMp("Cengage", "Johnston", "Cemcoma", 15, 4.7, "zort"));
+            recyclerView.setAdapter(new mpAdapter(super.getContext(), listing, this));
+        }
 
-                       callback.callbackString(docSnap.get("imageUrl").toString());
-                       i++;
-                   }
-                }
-            }
-        });
     }
-
-    private void createButtons(int buttonCount, View v) {
-            imageUriArr = new Uri[buttonCount];
-            for(int i = 0; i < imageButtonArr.length; i++) {
-                ImageButton btn = new ImageButton(v.getContext());
-                int finalI = i;
-                mStorage.getReference().child("mp-listings/"+imageUrlArr[i]).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        imageUriArr[finalI] = uri;
-                    }
-                });
-                btn.setImageURI(imageUriArr[i]);
-                //recyclerView.addView(btn); TODO: recyler view öğren sonra :(
-                imageButtonArr[i] = btn;
-            }
-    }
-
-
-
-
 
 
     @Override
-    public void onClick(View view) {
-        if(view.getId() == searchButton.getId()) {
+    public void onListingClick(int position) {
+        profileFragment profileFragment = new profileFragment();
 
-            //TODO: database'ten querry açıp bütün listing'leri alıp imageButtonArr'e eklicek, her seferinde yeni açabilirsin cemocan :)
-        } else {
-            for(ImageButton btn : imageButtonArr) {
-                if(view.getId() == btn.getId()) {
-                    //TODO: kullanıcıyı aktar listing'e bastıktan sonra
-                }
-            }
-        }
+        //TODO: position'a göre user alacaksın, onun profiline yönlendireceksin ama şuan olmaz
+
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame,profileFragment);
+        transaction.commit();
     }
 }

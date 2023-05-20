@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cemcoma.myapplication.R;
+import com.cemcoma.myapplication.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -23,11 +24,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class userLoginActivity extends AppCompatActivity {
 
-    TextInputEditText editEmailText , editPasswordText;
-    Button buttonLogin;
-    FirebaseAuth mAuth;
-    ProgressBar progressBar;
-    TextView login_to_register;
+    private TextInputEditText editEmailText , editPasswordText;
+    private Button buttonLogin;
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
+    private TextView login_to_register;
+    private String name;
     private static final String TAG = "EmailPassword";
 
     //Checking if a user is currently logged in --
@@ -107,8 +109,8 @@ public class userLoginActivity extends AppCompatActivity {
         });
     }
 
-    private void updateUI(FirebaseUser user) {
-        if (user == null) {
+    private void updateUI(FirebaseUser mUser) {
+        if (mUser == null) {
             return;
         }
         Intent intent = new Intent(userLoginActivity.this, dashboardActivity.class);

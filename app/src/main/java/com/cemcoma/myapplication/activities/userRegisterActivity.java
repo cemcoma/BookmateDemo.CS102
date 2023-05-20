@@ -37,7 +37,6 @@ public class userRegisterActivity extends AppCompatActivity {
     TextView register_to_login;
 
     //Checking if a user is currently logged in --
-    // from Firebase documentation https://firebase.google.com/docs/auth/android/password-auth?hl=en&authuser=0#java_6
     @Override
     public void onStart() {
         super.onStart();
@@ -47,7 +46,7 @@ public class userRegisterActivity extends AppCompatActivity {
             updateUI(currentUser);
         }
     }
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

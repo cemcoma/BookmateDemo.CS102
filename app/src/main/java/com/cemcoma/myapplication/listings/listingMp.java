@@ -1,26 +1,26 @@
 package com.cemcoma.myapplication.listings;
 
 public class listingMp {
-    private String bookname, author, sellername;
+    private String bookname, author, sellername, ImageString;
     private double rating;
-    private int price, imageInt;
+    private int price;
 
 
 
-    public listingMp(String bookname, String author, String sellername, int price, double rating, int imageInt  ) {
+    public listingMp(String bookname, String author, String sellername, int price, double rating, String ImageString  ) {
         this.bookname = bookname;
         this.author = author;
         this.price = price;
         this.sellername = sellername;
         this.rating = rating;
-        this.imageInt = imageInt;
+        this.ImageString = ImageString;
     }
-    public int getImageInt() {
-        return imageInt;
+    public String getImageUrl() {
+        return ImageString;
     }
 
-    public void setImageInt(int imageInt) {
-        this.imageInt = imageInt;
+    public void setImageString(String ImageString) {
+        this.ImageString = ImageString;
     }
 
     public String getBookname() {

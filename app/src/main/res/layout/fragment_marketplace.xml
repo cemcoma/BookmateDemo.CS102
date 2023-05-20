@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.marketplaceFragment" >
+    tools:context=".fragments.marketplaceFragment">
 
     <ImageButton
         android:id="@+id/searchButtonMp"
@@ -12,18 +12,32 @@
         android:layout_height="50dp"
         android:src="@drawable/ic_marketplace"
         app:layout_constraintBottom_toBottomOf="@+id/searchBarMp"
-        app:layout_constraintEnd_toEndOf="@+id/searchBarMp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/searchBarMp" />
+
+    <ImageButton
+        android:id="@+id/addListingButton"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="@+id/searchButtonMp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.764"
+        app:layout_constraintStart_toEndOf="@+id/searchButtonMp"
+        app:layout_constraintTop_toTopOf="@+id/searchButtonMp"
+        app:layout_constraintVertical_bias="0.142" />
 
     <EditText
         android:id="@+id/searchBarMp"
-        android:layout_width="216dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="213dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Enter a book name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.364"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,13 +46,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginTop="16dp"
         android:text="Listings"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/searchBarMp"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="@+id/searchBarMp"
         app:layout_constraintTop_toBottomOf="@+id/searchBarMp" />
 
     <androidx.recyclerview.widget.RecyclerView

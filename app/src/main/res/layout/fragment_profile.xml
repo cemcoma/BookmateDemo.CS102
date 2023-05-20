@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/ratingView"
         android:layout_width="37dp"
         android:layout_height="39dp"
         android:text="4.4"

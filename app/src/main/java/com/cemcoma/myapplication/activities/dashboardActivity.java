@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.cemcoma.myapplication.R;
+import com.cemcoma.myapplication.User;
 import com.cemcoma.myapplication.fragments.dashboardFragment;
 import com.cemcoma.myapplication.fragments.marketplaceFragment;
 import com.cemcoma.myapplication.fragments.profileFragment;
@@ -31,6 +32,7 @@ public class dashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enterance_main);
         Intent intent = getIntent();
+        User user = intent.getParcelableExtra("user");
 
         dashFragment = new dashboardFragment();
         marketFragment = new marketplaceFragment();
@@ -38,9 +40,6 @@ public class dashboardActivity extends AppCompatActivity {
         chatFragment = new chatFragment();
 
         setFragment(dashFragment);
-
-
-        username = intent.getStringExtra("username");
 
         menu = (BottomNavigationView) findViewById(R.id.dashborad_bottomMenu);
         menu.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
