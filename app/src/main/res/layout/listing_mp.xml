@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+    
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageListingMp"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:id="@+id/booknameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="150dp"
+        android:textSize="22sp"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/authorTextView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="150dp"
+        android:textSize="15sp"
+        android:text=""
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:id="@+id/priceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="150dp"
+        android:textSize="15sp"
+        android:text=""
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:id="@+id/sellerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="150dp"
+        android:textSize="15sp"
+        android:text=""
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:id="@+id/sellerRatingTextView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginStart="150dp"
+        android:textSize="15sp"
+        android:text=""
+        android:textColor="@color/black"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        />
+
+
+</RelativeLayout>

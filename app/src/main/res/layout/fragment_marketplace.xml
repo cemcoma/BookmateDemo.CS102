@@ -42,9 +42,10 @@
         app:layout_constraintTop_toBottomOf="@+id/searchBarMp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recylerViewMp"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:id="@+id/recyclerviewMp"
+        android:layout_width="407dp"
+        android:layout_height="427dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 

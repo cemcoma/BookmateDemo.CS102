@@ -1,10 +1,11 @@
 package com.cemcoma.myapplication.fragments;
 
-
+import com.cemcoma.myapplication.listings.*;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,11 +16,15 @@ import android.widget.ImageButton;
 
 import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.callback;
+import com.cemcoma.myapplication.listings.mpAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class marketplaceFragment extends Fragment implements View.OnClickListener { //Mp = Marketplace
@@ -34,20 +39,28 @@ public class marketplaceFragment extends Fragment implements View.OnClickListene
 
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_marketplace, container, false);
 
-        recyclerView =(RecyclerView) v.findViewById(R.id.recylerViewMp);
+        recyclerView =(RecyclerView) v.findViewById(R.id.recyclerviewMp);
         searchBar = (EditText) v.findViewById(R.id.searchBarMp);
         searchButton = (ImageButton) v.findViewById(R.id.searchButtonMp);
         searchButton.setOnClickListener(this);
 
-        mStorage = FirebaseStorage.getInstance(); //photolar burada kaydolcak
+        List<listingMp> listing = new ArrayList<>();
+        listing.add(new listingMp("cemcoma","cem","coma",10,4.4,10));
+        listing.add(new listingMp("cemcoma","cem1","coma1",11,3.4,10));
+        listing.add(new listingMp("cemcoma","cem2","coma2",12,2.4,10));
 
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerviewMp);
+        recyclerView.setLayoutManager(new LinearLayoutManager(super.getContext()));
+        recyclerView.setAdapter(new mpAdapter(super.getContext(), listing));
+
+        mStorage = FirebaseStorage.getInstance(); //photolar burada kaydolcak
         mFirestore = FirebaseFirestore.getInstance();
 
+        /*
         initialListings(v, new callback() {
             int i = 0;
             @Override
@@ -59,7 +72,7 @@ public class marketplaceFragment extends Fragment implements View.OnClickListene
                 }
             }
         });
-
+        */
 
         return v;
     }
