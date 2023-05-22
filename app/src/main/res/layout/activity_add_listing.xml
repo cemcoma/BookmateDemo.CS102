@@ -55,6 +55,7 @@
         android:id="@+id/addImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
         android:text="Add Image"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@+id/previewView"
@@ -62,24 +63,25 @@
 
     <ImageView
         android:id="@+id/previewView"
-        android:layout_width="202dp"
-        android:layout_height="172dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:layout_width="145dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintHorizontal_bias="0.815"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:srcCompat="@drawable/bookcober" />
+        app:layout_constraintTop_toBottomOf="@+id/priceView" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:text="Listing Photo:"
         android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="@+id/priceView"
-        app:layout_constraintTop_toBottomOf="@+id/priceView" />
+        app:layout_constraintEnd_toStartOf="@+id/previewView"
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintStart_toStartOf="@+id/addImageButton"
+        app:layout_constraintTop_toTopOf="@+id/previewView" />
 
     <Button
         android:id="@+id/uploadListingButton"

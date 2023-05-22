@@ -16,6 +16,7 @@ import com.cemcoma.myapplication.fragments.dashboardFragment;
 import com.cemcoma.myapplication.fragments.marketplaceFragment;
 import com.cemcoma.myapplication.fragments.profileFragment;
 import com.cemcoma.myapplication.fragments.chatFragment;
+import com.cemcoma.myapplication.fragments.welcomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -28,6 +29,7 @@ public class dashboardActivity extends AppCompatActivity {
     private marketplaceFragment marketFragment;
     private profileFragment profileFragment;
     private chatFragment chatFragment;
+    private welcomeFragment welcomeFragment;
 
 
     @Override
@@ -40,19 +42,9 @@ public class dashboardActivity extends AppCompatActivity {
         marketFragment = new marketplaceFragment();
         profileFragment = new profileFragment();
         chatFragment = new chatFragment();
+        welcomeFragment = new welcomeFragment();
 
-        /*here, implement the welcoming screen
-
-
-
-
-
-
-
-
-
-
-        */
+        setFragment(welcomeFragment);
 
         menu = (BottomNavigationView) findViewById(R.id.dashborad_bottomMenu);
         menu.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {

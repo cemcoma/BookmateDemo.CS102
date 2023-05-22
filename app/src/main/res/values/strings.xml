@@ -10,6 +10,7 @@
     <string name="registerCapital">REGISTER</string>
     <string name="already_registered">Already have an account? Login</string>
     <string name="no_account">Don\'t have an account? Register</string>
+    <string name="username">Username</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

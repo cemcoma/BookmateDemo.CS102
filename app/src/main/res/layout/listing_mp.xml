@@ -6,15 +6,14 @@
 
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="200dp"
         android:id="@+id/imageListingMp"
-        android:layout_centerVertical="true"
-        />
+        android:layout_width="145dp"
+        android:layout_height="200dp"
+        android:layout_centerVertical="true" />
     <TextView
         android:id="@+id/booknameTextView"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="150dp"
         android:textSize="22sp"
         android:text=""
@@ -24,7 +23,7 @@
         android:id="@+id/authorTextView"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="150dp"
         android:textSize="15sp"
         android:text=""
@@ -34,7 +33,7 @@
         android:id="@+id/priceTextView"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:layout_marginStart="150dp"
         android:textSize="15sp"
         android:text=""
@@ -44,7 +43,7 @@
         android:id="@+id/sellerTextView"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         android:layout_marginStart="150dp"
         android:textSize="15sp"
         android:text=""
@@ -54,7 +53,7 @@
         android:id="@+id/sellerRatingTextView"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="140dp"
         android:layout_marginStart="150dp"
         android:textSize="15sp"
         android:text=""

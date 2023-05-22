@@ -12,7 +12,7 @@ import android.widget.ScrollView;
 import com.cemcoma.myapplication.R;
 
 
-public class chatPiece extends Fragment {
+public class chatPiece extends Fragment { // gereksiz bir class bu aziz sen silersin
     private ScrollView scrollView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

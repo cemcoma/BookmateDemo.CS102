@@ -12,15 +12,44 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
 
-public class User implements Parcelable {
+
+public class User {
     private String username, UID, password, email, profileUrl;
     private int rating5, rating4, rating3, rating2, rating1;
 
     private FirebaseFirestore mFirestore;
 
+    /**
+     * Stores a new user in the database
+     * @param mUser
+     * @param username
+     * @param password
+     */
+    public User (FirebaseUser mUser, String username, String password) {
+        mFirestore = FirebaseFirestore.getInstance();
+        UID = mUser.getUid();
+        email = mUser.getEmail();
+        this.username = username;
+        this.password = password;
+        HashMap<String,Object> mData = new HashMap<>();
+        mData.put("username", username);
+        mData.put("password",password);
+        mData.put("profileUrl","default");
+        mData.put("rating1",0);
+        mData.put("rating2",0);
+        mData.put("rating3",0);
+        mData.put("rating4",0);
+        mData.put("rating5",0);
 
+        mFirestore.collection("users").document(UID).set(mData);
+    }
 
+    /**
+     * Retrieves the current user's data by getting the current authenticated user
+     * @param mUser
+     */
     public User(FirebaseUser mUser) {
         mFirestore = FirebaseFirestore.getInstance();
         UID = mUser.getUid();
@@ -40,31 +69,6 @@ public class User implements Parcelable {
             }
         });
     }
-
-    protected User(Parcel in) {
-        username = in.readString();
-        UID = in.readString();
-        password = in.readString();
-        email = in.readString();
-        profileUrl = in.readString();
-        rating5 = in.readInt();
-        rating4 = in.readInt();
-        rating3 = in.readInt();
-        rating2 = in.readInt();
-        rating1 = in.readInt();
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 
     public double getRating() {
         if((rating5+rating4+rating3+rating2+rating1) <= 0) return 0.5;
@@ -89,24 +93,5 @@ public class User implements Parcelable {
 
     public String getProfileUrl() {
         return profileUrl;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel parcel, int i) {
-        parcel.writeString(username);
-        parcel.writeString(UID);
-        parcel.writeString(password);
-        parcel.writeString(email);
-        parcel.writeString(profileUrl);
-        parcel.writeInt(rating5);
-        parcel.writeInt(rating4);
-        parcel.writeInt(rating3);
-        parcel.writeInt(rating2);
-        parcel.writeInt(rating1);
     }
 }

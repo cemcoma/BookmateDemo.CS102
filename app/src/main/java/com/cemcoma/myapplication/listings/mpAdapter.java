@@ -41,7 +41,6 @@ public class mpAdapter extends RecyclerView.Adapter<listingHolder> {
         double rating = list.get(position).getRating();
         holder.ratingView.setText("Rating: "+rating + " stars");
         Picasso.with(context).load(list.get(position).getImageUrl()).fit().centerCrop().into(holder.bookPhotoView);
-        // ekleme yapıcam ve fotolar da gözükecek :)
     }
 
     @Override
