@@ -126,6 +126,7 @@ public class userRegisterActivity extends AppCompatActivity {
         if (user == null) {
             return;
         }
-        //TODO after implementation of marketplace
+        Intent intent = new Intent(userRegisterActivity.this, dashboardActivity.class);
+        startActivity(intent);
     }
 }

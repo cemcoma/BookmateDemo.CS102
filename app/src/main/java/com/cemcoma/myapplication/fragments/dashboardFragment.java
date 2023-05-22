@@ -29,8 +29,8 @@ public class dashboardFragment extends Fragment {
         usernameTextView = (TextView) v.findViewById(R.id.usernameTextViewDash);
         userImage = (ImageView) v.findViewById(R.id.imageView);
         userImage.setBackgroundResource(R.drawable.book);
-        user = new User(FirebaseAuth.getInstance().getCurrentUser());
-        username = user.getUsername();
+
+        // username = user.getUsername(); // sonra bak
         usernameTextView.setText(username);
 
         // Inflate the layout for this fragment

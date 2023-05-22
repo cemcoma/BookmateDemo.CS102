@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/booknameView"
         android:layout_width="218dp"
         android:layout_height="50dp"
         android:layout_marginTop="36dp"
@@ -30,38 +30,38 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/authorView"
         android:layout_width="218dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Book author"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@+id/booknameView"
+        app:layout_constraintTop_toBottomOf="@+id/booknameView" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/priceView"
         android:layout_width="217dp"
         android:layout_height="49dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Price"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/authorView"
+        app:layout_constraintTop_toBottomOf="@+id/authorView" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/addImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Image"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5" />
+        app:layout_constraintBottom_toBottomOf="@+id/previewView"
+        app:layout_constraintEnd_toStartOf="@+id/previewView" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/previewView"
         android:layout_width="202dp"
         android:layout_height="172dp"
         android:src="@drawable/ic_launcher_foreground"
@@ -78,11 +78,11 @@
         android:layout_marginTop="12dp"
         android:text="Listing Photo:"
         android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+        app:layout_constraintStart_toStartOf="@+id/priceView"
+        app:layout_constraintTop_toBottomOf="@+id/priceView" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/uploadListingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Listing"
@@ -90,6 +90,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/addImageButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,10 @@
 package com.cemcoma.myapplication;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -8,7 +13,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 
-public class User {
+public class User implements Parcelable {
     private String username, UID, password, email, profileUrl;
     private int rating5, rating4, rating3, rating2, rating1;
 
@@ -36,6 +41,31 @@ public class User {
         });
     }
 
+    protected User(Parcel in) {
+        username = in.readString();
+        UID = in.readString();
+        password = in.readString();
+        email = in.readString();
+        profileUrl = in.readString();
+        rating5 = in.readInt();
+        rating4 = in.readInt();
+        rating3 = in.readInt();
+        rating2 = in.readInt();
+        rating1 = in.readInt();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
     public double getRating() {
         if((rating5+rating4+rating3+rating2+rating1) <= 0) return 0.5;
         return  (rating1 + rating2*2 + rating3*3 + rating4*4 + rating5*5) / (rating5+rating4+rating3+rating2+rating1 * 1.0) ;
@@ -59,5 +89,24 @@ public class User {
 
     public String getProfileUrl() {
         return profileUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(username);
+        parcel.writeString(UID);
+        parcel.writeString(password);
+        parcel.writeString(email);
+        parcel.writeString(profileUrl);
+        parcel.writeInt(rating5);
+        parcel.writeInt(rating4);
+        parcel.writeInt(rating3);
+        parcel.writeInt(rating2);
+        parcel.writeInt(rating1);
     }
 }

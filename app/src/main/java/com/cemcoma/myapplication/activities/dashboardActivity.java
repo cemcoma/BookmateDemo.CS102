@@ -17,10 +17,13 @@ import com.cemcoma.myapplication.fragments.marketplaceFragment;
 import com.cemcoma.myapplication.fragments.profileFragment;
 import com.cemcoma.myapplication.fragments.chatFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class dashboardActivity extends AppCompatActivity {
     private BottomNavigationView menu;
-    private String username;
+    private User user;
     private dashboardFragment dashFragment;
     private marketplaceFragment marketFragment;
     private profileFragment profileFragment;
@@ -31,15 +34,25 @@ public class dashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enterance_main);
-        Intent intent = getIntent();
-        User user = intent.getParcelableExtra("user");
+        user = new User(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()));
 
         dashFragment = new dashboardFragment();
         marketFragment = new marketplaceFragment();
         profileFragment = new profileFragment();
         chatFragment = new chatFragment();
 
-        setFragment(dashFragment);
+        /*here, implement the welcoming screen
+
+
+
+
+
+
+
+
+
+
+        */
 
         menu = (BottomNavigationView) findViewById(R.id.dashborad_bottomMenu);
         menu.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
