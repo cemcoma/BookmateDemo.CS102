@@ -21,33 +21,9 @@ public class User {
 
     private FirebaseFirestore mFirestore;
 
-    /**
-     * Stores a new user in the database
-     * @param mUser
-     * @param username
-     * @param password
-     */
-    public User (FirebaseUser mUser, String username, String password) {
-        mFirestore = FirebaseFirestore.getInstance();
-        UID = mUser.getUid();
-        email = mUser.getEmail();
-        this.username = username;
-        this.password = password;
-        HashMap<String,Object> mData = new HashMap<>();
-        mData.put("username", username);
-        mData.put("password",password);
-        mData.put("profileUrl","default");
-        mData.put("rating1",0);
-        mData.put("rating2",0);
-        mData.put("rating3",0);
-        mData.put("rating4",0);
-        mData.put("rating5",0);
-
-        mFirestore.collection("users").document(UID).set(mData);
-    }
 
     /**
-     * Retrieves the current user's data by getting the current authenticated user
+     * Retrieves the current user's data by getting the current authenticated user and creates an instance so u can use it :)
      * @param mUser
      */
     public User(FirebaseUser mUser) {
@@ -93,5 +69,29 @@ public class User {
 
     public String getProfileUrl() {
         return profileUrl;
+    }
+
+    /**
+     * Stores a new user in the database
+     * @param mUser
+     * @param username
+     * @param password
+     */
+    public static void storeUser(FirebaseUser mUser, String username, String password) {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        String UID = mUser.getUid();
+        String email = mUser.getEmail();
+
+        HashMap<String,Object> mData = new HashMap<>();
+        mData.put("username", username);
+        mData.put("password",password);
+        mData.put("profileUrl","default");
+        mData.put("rating1",0);
+        mData.put("rating2",0);
+        mData.put("rating3",0);
+        mData.put("rating4",0);
+        mData.put("rating5",0);
+
+        mFirestore.collection("users").document(UID).set(mData);
     }
 }

@@ -1,9 +1,7 @@
 package com.cemcoma.myapplication.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.User;
-import com.cemcoma.myapplication.fragments.dashboardFragment;
+import com.cemcoma.myapplication.fragments.lendingFragment;
 import com.cemcoma.myapplication.fragments.marketplaceFragment;
 import com.cemcoma.myapplication.fragments.profileFragment;
 import com.cemcoma.myapplication.fragments.chatFragment;
@@ -25,7 +23,7 @@ import java.util.Objects;
 public class dashboardActivity extends AppCompatActivity {
     private BottomNavigationView menu;
     private User user;
-    private dashboardFragment dashFragment;
+    private lendingFragment lendingFragment;
     private marketplaceFragment marketFragment;
     private profileFragment profileFragment;
     private chatFragment chatFragment;
@@ -38,7 +36,7 @@ public class dashboardActivity extends AppCompatActivity {
         setContentView(R.layout.enterance_main);
         user = new User(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()));
 
-        dashFragment = new dashboardFragment();
+        lendingFragment = new lendingFragment();
         marketFragment = new marketplaceFragment();
         profileFragment = new profileFragment();
         chatFragment = new chatFragment();
@@ -58,7 +56,7 @@ public class dashboardActivity extends AppCompatActivity {
                         setFragment(marketFragment);
                         return true;
                     case (R.id.dashboardMenuItem):
-                        setFragment(dashFragment);
+                        setFragment(lendingFragment);
                         return true;
                     case (R.id.chatMenuItem):
                         setFragment(chatFragment);

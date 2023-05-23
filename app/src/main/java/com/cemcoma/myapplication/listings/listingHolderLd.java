@@ -10,17 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.RecylerviewInterface;
 
-public class listingHolder extends RecyclerView.ViewHolder {
+public class listingHolderLd extends RecyclerView.ViewHolder {
     ImageView bookPhotoView;
-     TextView booknameView, authorView, sellerView, ratingView, priceView;
-    public listingHolder(@NonNull View itemView, RecylerviewInterface recylerviewInterface) {
+    TextView booknameView, authorView, borrowerView, ratingView;
+    public listingHolderLd(@NonNull View itemView, RecylerviewInterface recylerviewInterface) {
         super(itemView);
-        bookPhotoView = itemView.findViewById(R.id.imageListingMp);
-        booknameView = itemView.findViewById(R.id.booknameTextView);
-        authorView = itemView.findViewById(R.id.authorTextView);
-        priceView = itemView.findViewById(R.id.priceTextView);
-        sellerView = itemView.findViewById(R.id.sellerTextView);
-        ratingView = itemView.findViewById(R.id.sellerRatingTextView);
+        bookPhotoView = itemView.findViewById(R.id.imageListingLd);
+        booknameView = itemView.findViewById(R.id.booknameTextViewLd);
+        authorView = itemView.findViewById(R.id.authorTextViewLd);
+        borrowerView = itemView.findViewById(R.id.borrowerTextView);
+        ratingView = itemView.findViewById(R.id.borrowerRatingTextView);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,4 +34,5 @@ public class listingHolder extends RecyclerView.ViewHolder {
             }
         });
     }
+
 }

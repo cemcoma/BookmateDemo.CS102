@@ -129,7 +129,7 @@ public class userRegisterActivity extends AppCompatActivity {
             return;
         }
 
-        User createNewUser = new User(user, editUsernameText.getText().toString(), editPasswordText.getText().toString());
+        User.storeUser(user, editUsernameText.getText().toString(), editPasswordText.getText().toString());
         Intent intent = new Intent(userRegisterActivity.this, dashboardActivity.class);
         startActivity(intent);
     }

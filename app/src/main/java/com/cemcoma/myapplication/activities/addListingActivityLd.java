@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
-import android.net.UrlQuerySanitizer;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -17,11 +16,9 @@ import android.widget.Toast;
 
 import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.User;
-import com.cemcoma.myapplication.listings.Upload;
+import com.cemcoma.myapplication.listings.UploadLd;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,13 +27,13 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.net.URL;
 import java.util.Objects;
 
-public class addListingActivity extends AppCompatActivity {
+public class addListingActivityLd extends AppCompatActivity {
+
     private static final int PICK_IMAGE_REQUEST = 1;
     private Button chooseImageButton, uploadListingButton;
-    private EditText booknameText, authorText, priceText;
+    private EditText booknameText, authorText;
     private ImageView previewView;
     private Uri uri, downloadUri;
     private User user;
@@ -46,15 +43,14 @@ public class addListingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_listing);
+        setContentView(R.layout.activity_add_listing_ld);
 
         user = new User(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()));
-        chooseImageButton = (Button) findViewById(R.id.addImageButton);
-        uploadListingButton = (Button) findViewById(R.id.uploadListingButton);
-        booknameText = (EditText) findViewById(R.id.booknameView);
-        authorText = (EditText) findViewById(R.id.authorView);
-        priceText = (EditText) findViewById(R.id.priceView);
-        previewView = (ImageView)findViewById(R.id.previewView);
+        chooseImageButton = (Button) findViewById(R.id.addImageButtonLD);
+        uploadListingButton = (Button) findViewById(R.id.uploadListingButtonLd);
+        booknameText = (EditText) findViewById(R.id.booknameViewLd);
+        authorText = (EditText) findViewById(R.id.authorViewLd);
+        previewView = (ImageView)findViewById(R.id.previewViewLd);
 
         mStorage = FirebaseStorage.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
@@ -80,7 +76,7 @@ public class addListingActivity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
     private boolean uploadFile() {
-        if(booknameText.getText().length() == 0 || authorText.getText().length() == 0 || priceText.getText().length() == 0) {
+        if(booknameText.getText().length() == 0 || authorText.getText().length() == 0 ) {
             Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -88,7 +84,7 @@ public class addListingActivity extends AppCompatActivity {
         if(uri != null) {
             StorageReference storageReference= FirebaseStorage.getInstance().getReference();
 
-            final StorageReference ref  = mStorage.getReference("mp-uploads").child(booknameText.getText().toString().trim() + "-" + user.getUID() +"."+ getExtension(uri));
+            final StorageReference ref  = mStorage.getReference("ld-uploads").child(booknameText.getText().toString().trim() + "-" + user.getUID() +"."+ getExtension(uri));
             UploadTask uploadTask = ref.putFile(uri);
 
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -104,7 +100,7 @@ public class addListingActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
-                       setDownloadUriPlease(task.getResult());
+                        setDownloadUriPlease(task.getResult());
                     }
                 }
             });
@@ -138,8 +134,8 @@ public class addListingActivity extends AppCompatActivity {
 
     private void setDownloadUriPlease(Uri uri) {
         downloadUri = uri;
-        Upload upload = new Upload(booknameText.getText().toString(), downloadUri.toString() , user.getUsername(),Integer.parseInt(priceText.getText().toString()),user.getRating(), authorText.getText().toString());
-        mFirestore.collection("mp-listings").document(booknameText.getText().toString().trim() + "-" + user.getUID()).set(upload);
+        UploadLd upload = new UploadLd(booknameText.getText().toString(), downloadUri.toString() , user.getUsername(),user.getRating(), authorText.getText().toString());
+        mFirestore.collection("ld-listings").document(booknameText.getText().toString().trim() + "-" + user.getUID()).set(upload);
         close();
     }
 }

@@ -15,19 +15,22 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".activities.userRegisterActivity"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
+            android:name=".activities.addListingActivityLd"
             android:exported="false" />
         <activity
-            android:name=".activities.addListingActivity"
+            android:name=".activities.userRegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+        <activity
+            android:name=".activities.addListingActivityMp"
             android:exported="false" />
         <activity
             android:name=".activities.dashboardActivity"
             android:exported="false" />
         <activity
             android:name=".activities.userLoginActivity"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/Theme.Material3.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

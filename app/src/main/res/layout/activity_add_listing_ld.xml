@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.addListingActivity">
+    tools:context=".activities.addListingActivityLd">
+
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="60dp"
         android:text="Add Listing"
         android:textColor="#000000"
         android:textSize="25sp"
@@ -19,72 +20,64 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/booknameView"
+        android:id="@+id/booknameViewLd"
         android:layout_width="218dp"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Book name"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/authorViewLd"
         app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.573" />
 
     <EditText
-        android:id="@+id/authorView"
+        android:id="@+id/authorViewLd"
         android:layout_width="218dp"
         android:layout_height="50dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="212dp"
         android:ems="10"
         android:hint="Book author"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/booknameView"
-        app:layout_constraintTop_toBottomOf="@+id/booknameView" />
-
-    <EditText
-        android:id="@+id/priceView"
-        android:layout_width="217dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="Price"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/authorView"
-        app:layout_constraintTop_toBottomOf="@+id/authorView" />
+        app:layout_constraintStart_toStartOf="@+id/booknameViewLd"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/addImageButton"
+        android:id="@+id/addImageButtonLD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
         android:text="Add Image"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/previewView"
-        app:layout_constraintEnd_toStartOf="@+id/previewView" />
+        app:layout_constraintBottom_toBottomOf="@+id/previewViewLd"
+        app:layout_constraintEnd_toStartOf="@+id/previewViewLd"
+        app:layout_constraintHorizontal_bias="0.826"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/previewView"
+        android:id="@+id/previewViewLd"
         android:layout_width="145dp"
         android:layout_height="200dp"
-        android:layout_marginTop="16dp"
         android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.815"
+        app:layout_constraintHorizontal_bias="0.849"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.664" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
         android:text="Listing Photo:"
         android:textColor="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/previewView"
-        app:layout_constraintHorizontal_bias="0.84"
-        app:layout_constraintStart_toStartOf="@+id/addImageButton"
-        app:layout_constraintTop_toTopOf="@+id/previewView" />
+        app:layout_constraintEnd_toEndOf="@+id/addImageButtonLD"
+        app:layout_constraintTop_toTopOf="@+id/previewViewLd" />
 
     <Button
-        android:id="@+id/uploadListingButton"
+        android:id="@+id/uploadListingButtonLd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Listing"
@@ -92,6 +85,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addImageButton" />
+        app:layout_constraintTop_toBottomOf="@+id/addImageButtonLD" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,16 @@
 package com.cemcoma.myapplication.listings;
 
-public class Upload {
+public class UploadMp {
     private String name, url, sellername, author;
     private int price;
     private double rating;
 
 
 
-    public Upload() {
+    public UploadMp() {
 
     }
-    public Upload(String name, String imageUrl, String sellername, int price, double rating , String author) {
+    public UploadMp(String name, String imageUrl, String sellername, int price, double rating , String author) {
         this.name = name;
         this.url = imageUrl;
         this.sellername = sellername;

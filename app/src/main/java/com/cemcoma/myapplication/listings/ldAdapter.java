@@ -13,12 +13,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class mpAdapter extends RecyclerView.Adapter<listingHolderMp> {
+public class ldAdapter extends RecyclerView.Adapter<listingHolderLd> {
     private Context context;
-    private List<listingMp> list;
+    private List<listingLd> list;
     private final RecylerviewInterface recylerviewInterface;
 
-    public mpAdapter(Context context, List<listingMp> list, RecylerviewInterface recylerviewInterface) {
+    public ldAdapter(Context context, List<listingLd> list, RecylerviewInterface recylerviewInterface) {
         this.recylerviewInterface = recylerviewInterface;
         this.list = list;
         this.context = context;
@@ -26,17 +26,16 @@ public class mpAdapter extends RecyclerView.Adapter<listingHolderMp> {
 
     @NonNull
     @Override
-    public listingHolderMp onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public listingHolderLd onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new listingHolderMp(LayoutInflater.from(context).inflate(R.layout.listing_mp,parent,false), recylerviewInterface);
+        return new listingHolderLd(LayoutInflater.from(context).inflate(R.layout.listing_ld,parent,false), recylerviewInterface);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull listingHolderMp holder, int position) {
+    public void onBindViewHolder(@NonNull listingHolderLd holder, int position) {
         holder.booknameView.setText(list.get(position).getBookname());
         holder.authorView.setText("Author: " + list.get(position).getAuthor());
-        holder.priceView.setText("Price: TRY " + list.get(position).getPrice());
-        holder.sellerView.setText("Seller: " + list.get(position).getSellername());
+        holder.borrowerView.setText("Borrower: " + list.get(position).getBorrowername());
         double rating = list.get(position).getRating();
         holder.ratingView.setText("Rating: "+rating + " stars");
         Picasso.with(context).load(list.get(position).getImageUrl()).fit().centerCrop().into(holder.bookPhotoView);
