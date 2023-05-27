@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,30 +55,29 @@ public class chatFragment extends Fragment {
        mRecycleView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.VERTICAL, false));
 
        mQuery = mFirestore.collection("users");
-       mQuery.addSnapshotListener(new EventListener<QuerySnapshot>(){
+       mQuery.addSnapshotListener((value, error) -> {
+           if (error != null) {
+               Toast.makeText(v.getContext(), error.getMessage(), Toast.LENGTH_SHORT);
+               return;
+           }
 
-           @Override
-           public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-               if (error != null) {
-                   Toast.makeText(v.getContext(), error.getMessage(), Toast.LENGTH_SHORT);
-                   return;
+           if (value != null) {
+               mUserList.clear();
+
+               for (DocumentSnapshot snapshot: value.getDocuments()) {
+                   mKullanıcı = snapshot.toObject(User.class);
+
+                   assert mKullanıcı != null;
+                   //if (!mKullanıcı.getUID().equals(mUser.getUid()))
+                       mUserList.add(mKullanıcı);
+
+
+
                }
 
-               if (value != null) {
-                   mUserList.clear();
-
-                   for (DocumentSnapshot snapshot: value.getDocuments()) {
-                       mKullanıcı = snapshot.toObject(User.class);
-
-                       assert mKullanıcı != null;
-                       if (!mKullanıcı.getUID().equals(mUser.getUid()))
-                           mUserList.add(mKullanıcı);
-                   }
-
-                   mRecycleView.addItemDecoration(new LinearDecoration(20, mUserList.size()));
-                   mAdapter = new userAdapter(mUserList, v.getContext());
-                   mRecycleView.setAdapter(mAdapter);
-               }
+               mRecycleView.addItemDecoration(new LinearDecoration(20, mUserList.size()));
+               mAdapter = new userAdapter(mUserList, v.getContext());
+               mRecycleView.setAdapter(mAdapter);
            }
        });
 

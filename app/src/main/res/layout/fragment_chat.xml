@@ -13,8 +13,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="1dp"
         android:ems="10"
+        android:hint="Search"
         android:inputType="text"
-        android:text="Name" />
+        android:textAlignment="center" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Users_fragment_recycleView"
