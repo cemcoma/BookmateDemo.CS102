@@ -76,7 +76,7 @@ public class chatFragment extends Fragment {
                }
 
                mRecycleView.addItemDecoration(new LinearDecoration(20, mUserList.size()));
-               mAdapter = new userAdapter(mUserList, v.getContext());
+               mAdapter = new userAdapter(mUserList, v.getContext(), mUser.getUid());
                mRecycleView.setAdapter(mAdapter);
            }
        });
