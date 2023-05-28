@@ -6,22 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".fragments.chatFragment">
 
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="1dp"
-        android:ems="10"
-        android:hint="Search"
-        android:inputType="text"
-        android:textAlignment="center" />
+    <include
+        android:id="@+id/ToolBar"
+        layout="@layout/bar_layout"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Users_fragment_recycleView"
         android:layout_width="match_parent"
+        android:layout_below="@+id/ToolBar"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
         android:scrollbars="none" />
 
 

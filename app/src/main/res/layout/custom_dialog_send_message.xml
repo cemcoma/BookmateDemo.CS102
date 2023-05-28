@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -31,12 +32,14 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
 
@@ -44,18 +47,22 @@
                 android:id="@+id/custom_dialog_send_message_imgCancel"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
+                android:layout_gravity="start|bottom"
                 android:background="@drawable/custom_dialog_send_message_btn_bg"
                 android:padding="10dp"
-                android:src="@drawable/baseline_arrow_back" />
+                android:src="@drawable/baseline_arrow_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/custom_dialog_send_message_sendLinear"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:layout_marginLeft="50dp"
                 android:background="@drawable/custom_dialog_send_message_btn_bg"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="45dp"
@@ -72,14 +79,15 @@
 
 
             </LinearLayout>
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </RelativeLayout>
         
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="150dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:background="@color/teal_700"
         android:id="@+id/custom_dialog_send_message_imgUserProfile"
         android:layout_centerHorizontal="true"
@@ -90,8 +98,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="aziz"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/custom_dialog_send_message_imgUserProfile"
         android:id="@+id/custom_dialog_send_message_imgUserName"
