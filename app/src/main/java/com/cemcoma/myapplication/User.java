@@ -89,6 +89,7 @@ public class User {
         String email = mUser.getEmail();
 
         HashMap<String,Object> mData = new HashMap<>();
+        mData.put("email",email);
         mData.put("username", username);
         mData.put("password",password);
         mData.put("profileUrl","default");
