@@ -4,6 +4,7 @@ package com.cemcoma.myapplication.fragments;
 import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.User;
+import com.cemcoma.myapplication.activities.ChatActivity;
 import com.cemcoma.myapplication.listings.MessageRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,6 +60,7 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userHolder> {
     private String mUID, mName, mProfileUrl, channelID, messageDocID;
     private MessageRequest messageRequest;
     private HashMap<String, Object> mData;
+    private Intent chatIntent;
 
 
 
@@ -103,7 +106,10 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userHolder> {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()){
-                                Toast.makeText(mContext, "You can start messaging.", Toast.LENGTH_SHORT).show();
+                                chatIntent = new Intent(mContext, ChatActivity.class);
+                                chatIntent.putExtra("targetID", mUserList.get(kpos).getUID());
+                                chatIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                mContext.startActivity(chatIntent);
                             }
                             else
                                 sendMessageDialog(mUserList.get(kpos));
