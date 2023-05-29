@@ -103,7 +103,7 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userHolder> {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()){
-
+                                Toast.makeText(mContext, "You can start messaging.", Toast.LENGTH_SHORT).show();
                             }
                             else
                                 sendMessageDialog(mUserList.get(kpos));

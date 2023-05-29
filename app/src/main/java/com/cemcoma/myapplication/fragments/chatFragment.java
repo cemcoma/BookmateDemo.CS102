@@ -61,6 +61,8 @@ public class chatFragment extends Fragment {
     private DocumentReference mRef;
     private User RefUser;
     private MessageRequestAdapter messageRequestAdapter;
+    private DocumentReference userRef;
+    private User RefKullanici;
 
 
 
@@ -71,6 +73,16 @@ public class chatFragment extends Fragment {
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mFirestore = FirebaseFirestore.getInstance();
+
+        userRef = mFirestore.collection("users").document(mUser.getUid());
+        userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists())
+                    RefKullanici = documentSnapshot.toObject(User.class);
+            }
+        });
+
         mUserList = new ArrayList<>();
 
         mRecycleView = v.findViewById(R.id.Users_fragment_recycleView);
@@ -184,7 +196,8 @@ public class chatFragment extends Fragment {
                 LinearLayoutManager.VERTICAL, false));
 
         if (messageRequestList.size() > 0){
-            messageRequestAdapter = new MessageRequestAdapter(messageRequestList, v.getContext());
+            messageRequestAdapter = new MessageRequestAdapter(messageRequestList, v.getContext(), RefKullanici.getUID(),
+                    RefKullanici.getUsername(), RefKullanici.getProfileUrl());
             MessageRequestsRecycleView.setAdapter(messageRequestAdapter);
         }
 
