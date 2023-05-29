@@ -55,7 +55,7 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userHolder> {
     private TextView textName;
     private FirebaseFirestore mFireStore;
     private DocumentReference mRef;
-    private String mUID, channelID, messageDocID;
+    private String mUID, mName, mProfileUrl, channelID, messageDocID;
     private MessageRequest messageRequest;
     private HashMap<String, Object> mData;
 
@@ -70,10 +70,12 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userHolder> {
         return new userHolder(v);
     }
 
-    public userAdapter(ArrayList<User> mUserList, Context mContext, String mUID) {
+    public userAdapter(ArrayList<User> mUserList, Context mContext, String mUID, String mName, String mProfileUrl) {
         this.mUserList = mUserList;
         this.mContext = mContext;
         this.mUID = mUID;
+        this.mName = mName;
+        this.mProfileUrl = mProfileUrl;
 
         mFireStore = FirebaseFirestore.getInstance();
     }
@@ -147,7 +149,7 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userHolder> {
                 if (!TextUtils.isEmpty(textMessage)){
                     channelID = UUID.randomUUID().toString();
 
-                    messageRequest = new MessageRequest(channelID, mUID);
+                    messageRequest = new MessageRequest(channelID, mUID, mName, mProfileUrl);
                     mFireStore.collection("MessageRequests").document(user.getUID())
                             .collection("requests").document(mUID).set(messageRequest)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {

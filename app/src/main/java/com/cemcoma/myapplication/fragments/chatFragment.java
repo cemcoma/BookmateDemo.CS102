@@ -24,8 +24,10 @@ import android.widget.Toast;
 import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.User;
 import com.cemcoma.myapplication.listings.MessageRequest;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -56,6 +58,11 @@ public class chatFragment extends Fragment {
     private Dialog MessageRequestsDialog;
     private ImageView closeMessageRequests;
     private RecyclerView MessageRequestsRecycleView;
+    private DocumentReference mRef;
+    private User RefUser;
+    private MessageRequestAdapter messageRequestAdapter;
+
+
 
 
     @Override
@@ -75,6 +82,38 @@ public class chatFragment extends Fragment {
         txtNtfCount = v.findViewById(R.id.bar_layout_notification_count);
         messageRequestList = new ArrayList<>();
 
+        mRef = mFirestore.collection("users").document(mUser.getUid());
+        mRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    RefUser = documentSnapshot.toObject(User.class);
+
+                    mQuery = mFirestore.collection("users");
+                    mQuery.addSnapshotListener((value, error) -> {
+                        if (error != null) {
+                            Toast.makeText(v.getContext(), error.getMessage(), Toast.LENGTH_SHORT);
+                            return;
+                        }
+
+                        if (value != null) {
+                            mUserList.clear();
+
+                            for (DocumentSnapshot snapshot: value.getDocuments()) {
+                                mKullanıcı = snapshot.toObject(User.class);
+
+                                assert mKullanıcı != null;
+                                //if (!mKullanıcı.getUID().equals(mUser.getUid()))
+                                mUserList.add(mKullanıcı);
+                            }
+                            mRecycleView.addItemDecoration(new LinearDecoration(20, mUserList.size()));
+                            mAdapter = new userAdapter(mUserList, v.getContext(), RefUser.getUID(), RefUser.getUsername(), RefUser.getProfileUrl());
+                            mRecycleView.setAdapter(mAdapter);
+                        }
+                    });
+                }
+            }
+        });
 
         query = mFirestore.collection("MessageRequests").document(mUser.getUid()).collection("requests");
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -95,9 +134,6 @@ public class chatFragment extends Fragment {
                 }
             }
         });
-
-
-
        mRelaNotif.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -105,28 +141,7 @@ public class chatFragment extends Fragment {
            }
        });
 
-       mQuery = mFirestore.collection("users");
-       mQuery.addSnapshotListener((value, error) -> {
-           if (error != null) {
-               Toast.makeText(v.getContext(), error.getMessage(), Toast.LENGTH_SHORT);
-               return;
-           }
 
-           if (value != null) {
-               mUserList.clear();
-
-               for (DocumentSnapshot snapshot: value.getDocuments()) {
-                   mKullanıcı = snapshot.toObject(User.class);
-
-                   assert mKullanıcı != null;
-                   //if (!mKullanıcı.getUID().equals(mUser.getUid()))
-                       mUserList.add(mKullanıcı);
-               }
-               mRecycleView.addItemDecoration(new LinearDecoration(20, mUserList.size()));
-               mAdapter = new userAdapter(mUserList, v.getContext(), mUser.getUid());
-               mRecycleView.setAdapter(mAdapter);
-           }
-       });
         return v;
     }
 
@@ -164,7 +179,17 @@ public class chatFragment extends Fragment {
             }
         });
 
+        MessageRequestsRecycleView.setHasFixedSize(true);
+        MessageRequestsRecycleView.setLayoutManager(new LinearLayoutManager(v.getContext(),
+                LinearLayoutManager.VERTICAL, false));
+
+        if (messageRequestList.size() > 0){
+            messageRequestAdapter = new MessageRequestAdapter(messageRequestList, v.getContext());
+            MessageRequestsRecycleView.setAdapter(messageRequestAdapter);
+        }
+
         MessageRequestsDialog.show();
+
     }
 
 }
