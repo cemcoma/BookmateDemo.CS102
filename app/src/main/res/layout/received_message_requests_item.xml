@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="77dp"
+            android:id="@+id/received_message_requests_item_imgProfile"
+            android:layout_height="77dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_margin="5dp"
+            android:id="@+id/received_message_requests_item_txtMessage"
+            android:textSize="12sp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/received_message_requests_item_linear"
+            android:layout_toRightOf="@+id/received_message_requests_item_imgProfile"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/received_message_requests_item_linear"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:id="@+id/received_message_requests_item_imgCancel"
+                android:src="@drawable/baseline_close"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/received_message_requests_item_imgAccept"
+                android:src="@drawable/baseline_check"
+                android:layout_height="40dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
