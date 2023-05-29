@@ -2,6 +2,7 @@ package com.cemcoma.myapplication;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -12,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.Console;
 import java.util.HashMap;
 
 
@@ -21,6 +23,10 @@ public class User {
 
     private FirebaseFirestore mFirestore;
 
+
+    public User() {
+
+    }
 
     /**
      * Retrieves the current user's data by getting the current authenticated user and creates an instance so u can use it :)
