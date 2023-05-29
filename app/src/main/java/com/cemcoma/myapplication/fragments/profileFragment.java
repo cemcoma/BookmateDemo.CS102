@@ -1,5 +1,6 @@
 package com.cemcoma.myapplication.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,19 +13,29 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cemcoma.myapplication.R;
+import com.cemcoma.myapplication.User;
+import com.cemcoma.myapplication.activities.userListingsActivity;
 import com.cemcoma.myapplication.activities.userLoginActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.squareup.picasso.Picasso;
 
 
 public class profileFragment extends Fragment {
-    ImageView pImage;
-    TextView ratingView;
-    FirebaseAuth auth;
-    Button button;
-    FirebaseUser user;
+    private ImageView pImage;
+    protected TextView ratingView, usernameView, preferencesView, listingView, favoritesView;
+    protected FirebaseAuth auth;
+    protected Button button;
+    protected FirebaseUser authUser;
+    protected User user;
+
 
 
     @Override
@@ -32,23 +43,58 @@ public class profileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         auth = FirebaseAuth.getInstance();
         button = v.findViewById(R.id.button);
-        user = auth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        authUser = auth.getCurrentUser();
+        assert authUser != null;
+        user = new User(authUser);
         pImage = (ImageView) v.findViewById(R.id.profileImageView);
         ratingView = (TextView) v.findViewById(R.id.ratingView);
+        usernameView = v.findViewById(R.id.usernameTextView);
+        preferencesView = v.findViewById(R.id.preferencesTextView);
+        listingView = v.findViewById(R.id.listingsTextView);
+        favoritesView = v.findViewById(R.id.favoritesTextView);
+
+        listingView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentToListings = new Intent(getActivity(), userListingsActivity.class);
+                intentToListings.putExtra("username", user.getUsername());
+                startActivity(intentToListings);
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent =  new Intent(getActivity(), userLoginActivity.class);
+                Intent intent =  new Intent(getActivity(), userListingsActivity.class);
                 startActivity(intent);
             }
         });
 
-
-
-
-
+        initializeValues();
         return v;
+    }
+
+    private void initializeValues() {
+
+        FirebaseFirestore.getInstance().collection("users").document(authUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                usernameView.setText(documentSnapshot.get("username").toString());
+
+                if(!documentSnapshot.get("profileUrl").toString().equals("default")) Picasso.with(getContext()).load(documentSnapshot.get("profileUrl").toString()).fit().centerCrop().into(pImage);
+                int rating1 = Integer.parseInt(documentSnapshot.get("rating1").toString());
+                int rating2 = Integer.parseInt(documentSnapshot.get("rating2").toString());
+                int rating3 = Integer.parseInt(documentSnapshot.get("rating3").toString());
+                int rating4 = Integer.parseInt(documentSnapshot.get("rating4").toString());
+                int rating5 = Integer.parseInt(documentSnapshot.get("rating5").toString());
+
+                if((rating5+rating4+rating3+rating2+rating1) <= 0) ratingView.setText(0.5 + "");
+                else ratingView.setText(Double.toString((rating1 + rating2*2 + rating3*3 + rating4*4 + rating5*5)/(rating5+rating4+rating3+rating2+rating1 * 1.0)).substring(0,3));
+            }
+        });
+
+
     }
 }

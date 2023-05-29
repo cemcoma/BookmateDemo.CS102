@@ -23,7 +23,7 @@
         android:id="@+id/imageView12"
         android:layout_width="67dp"
         android:layout_height="91dp"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/listingsTextView"
         app:layout_constraintTop_toBottomOf="@+id/imageView10"
         tools:src="@drawable/bookcober2" />
 
@@ -40,12 +40,12 @@
         android:id="@+id/imageView10"
         android:layout_width="66dp"
         android:layout_height="77dp"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/listingsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/listingsTextView"
         tools:src="@drawable/bookcober" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -57,13 +57,15 @@
 
     <ImageView
         android:id="@+id/profileImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_marginStart="32dp"
 
         android:layout_marginTop="16dp"
+        android:background="@color/loginBG"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground"
         tools:src="@tools:sample/avatars" />
 
     <ImageView
@@ -79,7 +81,7 @@
         android:id="@+id/ratingView"
         android:layout_width="37dp"
         android:layout_height="39dp"
-        android:text="4.4"
+        android:text="0.5"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/profileImageView"
@@ -87,9 +89,10 @@
         app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/favoritesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:text="Favorites"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -98,30 +101,31 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/preferencesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="preferences"
-        app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintEnd_toEndOf="@+id/usernameTextView"
+        app:layout_constraintStart_toStartOf="@+id/usernameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/listingsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:text="Listings"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/favoritesTextView"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="61dp"
         android:layout_height="82dp"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/favoritesTextView"
+        app:layout_constraintTop_toBottomOf="@+id/favoritesTextView"
         tools:src="@drawable/media_10e3cfe4d244d2d84937e3b4eb99dc054a47b80e9" />
 
     <TextView
