@@ -62,6 +62,8 @@ public class userRegisterActivity extends AppCompatActivity {
         register_to_login = findViewById(R.id.loginNow);
 
         mAuth = FirebaseAuth.getInstance();
+
+
         buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +95,6 @@ public class userRegisterActivity extends AppCompatActivity {
                                     Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Toast.makeText(userRegisterActivity.this, "Account created.", Toast.LENGTH_SHORT).show();
-
                                     updateUI(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -129,8 +130,12 @@ public class userRegisterActivity extends AppCompatActivity {
             return;
         }
 
-        User.storeUser(user, editUsernameText.getText().toString(), editPasswordText.getText().toString());
-        Intent intent = new Intent(userRegisterActivity.this, dashboardActivity.class);
+        Intent intent = new Intent(userRegisterActivity.this, preferencesActivity.class);
+        intent.putExtra("user" , user);
+        intent.putExtra("username" , editUsernameText.getText().toString());
+        intent.putExtra("password" , editPasswordText.getText().toString());
         startActivity(intent);
     }
+
+
 }
