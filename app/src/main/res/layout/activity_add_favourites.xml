@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.addFavouritesActivity">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:text="Add Favourites"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/booknameViewF"
+        android:layout_width="218dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Book name"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <EditText
+        android:id="@+id/authorViewF"
+        android:layout_width="218dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Book author"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/booknameViewF"
+        app:layout_constraintTop_toBottomOf="@+id/booknameViewF" />
+
+    <Button
+        android:id="@+id/addImageButtonF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="Add Image"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/previewViewF"
+        app:layout_constraintEnd_toStartOf="@+id/previewViewF" />
+
+    <ImageView
+        android:id="@+id/previewViewF"
+        android:layout_width="145dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="112dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.853"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authorViewF" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Listing Photo:"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/previewViewF"
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintStart_toStartOf="@+id/addImageButtonF"
+        app:layout_constraintTop_toTopOf="@+id/previewViewF" />
+
+    <Button
+        android:id="@+id/uploadListingButtonF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Listing"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addImageButtonF" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

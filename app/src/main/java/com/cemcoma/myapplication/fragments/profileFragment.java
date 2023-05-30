@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.RecylerviewInterface;
 import com.cemcoma.myapplication.User;
+import com.cemcoma.myapplication.activities.favouritesActivity;
 import com.cemcoma.myapplication.activities.userListingsActivity;
 import com.cemcoma.myapplication.activities.userLoginActivity;
 import com.cemcoma.myapplication.callback;
@@ -76,6 +77,15 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
                 Intent intentToListings = new Intent(getActivity(), userListingsActivity.class);
                 intentToListings.putExtra("username", user.getUsername());
                 startActivity(intentToListings);
+            }
+        });
+
+        favoritesView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentToFavourites = new Intent(getActivity(), favouritesActivity.class);
+                intentToFavourites.putExtra("username", user.getUsername());
+                startActivity(intentToFavourites);
             }
         });
 
