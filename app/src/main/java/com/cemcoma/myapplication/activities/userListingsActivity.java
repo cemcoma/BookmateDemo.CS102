@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ import java.util.Objects;
 
 public class userListingsActivity extends AppCompatActivity implements RecylerviewInterface {
     private RecyclerView recyclerView, recyclerViewld;
-    private ImageButton searchButton, addListingButton;
+    private ImageButton goBack;
 
     private EditText searchBar;
     private FirebaseStorage mStorage;
@@ -55,6 +56,14 @@ public class userListingsActivity extends AppCompatActivity implements Recylervi
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
+
+        goBack = findViewById(R.id.goback3);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         Query query = mFirestore.collection("mp-listings").whereEqualTo("sellername", username);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

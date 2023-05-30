@@ -20,14 +20,14 @@
         app:layout_constraintStart_toEndOf="@+id/profileImageViewV"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImageViewV"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_marginStart="32dp"
 
         android:layout_marginTop="16dp"
-        android:background="@color/loginBG"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground"

@@ -28,17 +28,17 @@
                 app:civ_border_color="#FFFFFF"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
-                android:text="text"
-                android:textStyle="bold"
                 android:id="@+id/chat_activity_txtTargetName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/chat_activity_imgTargetProfie"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="29dp"
                 android:layout_toRightOf="@+id/chat_activity_imgTargetProfie"
-                android:textSize="15sp"
+                android:text="text"
                 android:textColor="@color/white"
-                android:layout_height="wrap_content"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:onClick="btnCloseChat"

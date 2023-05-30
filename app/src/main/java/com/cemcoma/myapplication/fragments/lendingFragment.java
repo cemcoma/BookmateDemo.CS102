@@ -18,6 +18,7 @@ import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.RecylerviewInterface;
 import com.cemcoma.myapplication.User;
 import com.cemcoma.myapplication.activities.addListingActivityLd;
+import com.cemcoma.myapplication.activities.visitorProfileActivity;
 import com.cemcoma.myapplication.listings.ldAdapter;
 import com.cemcoma.myapplication.listings.listingLd;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -125,13 +126,9 @@ public class lendingFragment extends Fragment implements RecylerviewInterface, V
 
     @Override
     public void onListingClick(int position) {
-        profileFragment profileFragment = new profileFragment();
-
-        //TODO: position'a göre user alacaksın, onun profiline yönlendireceksin ama şuan olmaz çünkü kimsenin profili yok
-
-        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame,profileFragment);
-        transaction.commit();
+        Intent intent = new Intent(this.getContext(), visitorProfileActivity.class);
+        intent.putExtra("username", listing.get(position).getBorrowername());
+        startActivity(intent);
     }
     private void searchUnsuccessfull() {
         Toast.makeText(this.getContext(), "Nothing Found!", Toast.LENGTH_SHORT).show();

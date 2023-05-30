@@ -59,6 +59,9 @@ public class settingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext() , preferencesActivity.class);
+                i.putExtra("user" , FirebaseAuth.getInstance().getCurrentUser());
+                i.putExtra("username" , user.getUsername());
+                i.putExtra("password" , user.getPassword());
                 startActivity(i);
             }
         });

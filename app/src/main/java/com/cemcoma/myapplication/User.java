@@ -51,6 +51,7 @@ public class User {
                 rating4 = Integer.parseInt(documentSnapshot.get("rating4").toString());
                 rating5 = Integer.parseInt(documentSnapshot.get("rating5").toString());
                 preferences = (HashMap<String, Boolean>) documentSnapshot.get("preferences");
+
             }
         });
     }

@@ -34,7 +34,7 @@ import java.util.Objects;
 
 public class favouritesActivity extends AppCompatActivity implements RecylerviewInterface {
     private RecyclerView recyclerView, recyclerViewld;
-    private ImageButton searchButton, addListingButton;
+    private ImageButton goBack;
 
     private EditText searchBar;
     private FirebaseStorage mStorage;
@@ -62,6 +62,13 @@ public class favouritesActivity extends AppCompatActivity implements Recylerview
             }
         });
 
+        goBack = findViewById(R.id.goback2);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 

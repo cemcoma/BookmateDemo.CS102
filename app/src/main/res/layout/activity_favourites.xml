@@ -7,6 +7,16 @@
     tools:context=".activities.favouritesActivity">
 
     <ImageButton
+        android:id="@+id/goback2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/baseline_arrow_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
         android:id="@+id/addFavouritesButton"
         android:layout_width="49dp"
         android:layout_height="49dp"
@@ -16,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/searchButtonMp"
+
         app:layout_constraintVertical_bias="0.142" />
 
     <TextView
@@ -33,8 +43,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favouritesRecylerView"
-        android:layout_width="409dp"
-        android:layout_height="607dp"
+        android:layout_width="408dp"
+        android:layout_height="540dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 </androidx.constraintlayout.widget.ConstraintLayout>
