@@ -21,6 +21,8 @@ public class User {
     private String username, UID, password, email, profileUrl;
     private int rating5, rating4, rating3, rating2, rating1;
 
+    private HashMap<String , Boolean> preferences;
+
     private FirebaseFirestore mFirestore;
 
 
@@ -47,7 +49,7 @@ public class User {
                 rating3 = Integer.parseInt(documentSnapshot.get("rating3").toString());
                 rating4 = Integer.parseInt(documentSnapshot.get("rating4").toString());
                 rating5 = Integer.parseInt(documentSnapshot.get("rating5").toString());
-
+                preferences = (HashMap<String , Boolean>) (documentSnapshot.get("preferences"));
             }
         });
     }
@@ -77,13 +79,15 @@ public class User {
         return profileUrl;
     }
 
+    public HashMap<String , Boolean> getPreferences() { return preferences; }
+
     /**
      * Stores a new user in the database
      * @param mUser
      * @param username
      * @param password
      */
-    public static void storeUser(FirebaseUser mUser, String username, String password) {
+    public static void storeUser(FirebaseUser mUser, String username, String password , HashMap preferences) {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         String UID = mUser.getUid();
         String email = mUser.getEmail();
@@ -98,6 +102,8 @@ public class User {
         mData.put("rating3",0);
         mData.put("rating4",0);
         mData.put("rating5",0);
+
+        mData.put("preferences" , preferences);
 
         mFirestore.collection("users").document(UID).set(mData);
     }

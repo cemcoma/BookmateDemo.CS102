@@ -27,7 +27,7 @@
             android:name=".activities.userListingsActivity"
             android:exported="false" />
         <activity
-            android:name=".preferencesActivity"
+            android:name=".activities.preferencesActivity"
             android:exported="false" />
         <activity
             android:name=".activities.addListingActivityLd"
