@@ -118,7 +118,7 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
 
     private void initializeFavorites(String username) {
 
-        Query query = FirebaseFirestore.getInstance().collection("favourites").limit(5);
+        Query query = FirebaseFirestore.getInstance().collection("favourites").whereEqualTo("owner", username).limit(5);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -127,7 +127,7 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
                     String author = docSnap.get("author").toString();
                     String url = docSnap.get("imageString").toString();
 
-                    listingBook.add(new book(bookname, author, url));
+                    listingBook.add(new book(bookname, author, url, username));
                 }
                 showListingsFavourites();
             }

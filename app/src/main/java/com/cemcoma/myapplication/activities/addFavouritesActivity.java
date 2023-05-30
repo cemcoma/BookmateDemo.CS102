@@ -134,7 +134,7 @@ public class addFavouritesActivity extends AppCompatActivity {
 
     private void setDownloadUriPlease(Uri uri) {
         downloadUri = uri;
-        book upload = new book(booknameText.getText().toString(),authorText.getText().toString(), downloadUri.toString());
+        book upload = new book(booknameText.getText().toString(),authorText.getText().toString(), downloadUri.toString(), user.getUsername());
         mFirestore.collection("favourites").document(booknameText.getText().toString().trim() + "-" + user.getUID()).set(upload);
         close();
     }

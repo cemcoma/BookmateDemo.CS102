@@ -6,12 +6,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 
 public class book {
-    private String bookname, author, ImageString;
+    private String bookname, author, ImageString, owner;
 
-    public book(String bookname, String author,  String ImageString ) {
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public book(String bookname, String author, String ImageString, String owner ) {
         this.bookname = bookname;
         this.author = author;
         this.ImageString = ImageString;
+        this.owner = owner;
     }
 
     public String getBookname() {
@@ -38,7 +47,7 @@ public class book {
         ImageString = imageString;
     }
 
-    public static void storeBook(String bookname, String author,  String ImageString) {
+    public static void storeBook(String bookname, String author,  String ImageString, String owner) {
 
             FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
 
@@ -46,6 +55,7 @@ public class book {
             mData.put("bookname", bookname);
             mData.put("author",author);
             mData.put("bookImage","default");
+            mData.put("owner", owner);
 
 
             mFirestore.collection("books").document(bookname).set(mData);

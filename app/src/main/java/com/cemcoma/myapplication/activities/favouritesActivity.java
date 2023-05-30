@@ -65,7 +65,7 @@ public class favouritesActivity extends AppCompatActivity implements Recylerview
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
-        Query query = mFirestore.collection("favourites");
+        Query query = mFirestore.collection("favourites").whereEqualTo("owner", username);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -73,8 +73,9 @@ public class favouritesActivity extends AppCompatActivity implements Recylerview
                     String bookname = docSnap.get("bookname").toString();
                     String author = docSnap.get("author").toString();
                     String url = docSnap.get("imageString").toString();
+                    String owner = docSnap.get("owner").toString();
 
-                    listing.add(new book(bookname, author, url));
+                    listing.add(new book(bookname, author, url, owner));
                 }
                 showListings();
             }
