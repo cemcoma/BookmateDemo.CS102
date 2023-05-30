@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.RecylerviewInterface;
@@ -87,6 +88,10 @@ public class favouritesActivity extends AppCompatActivity implements Recylerview
 
     @Override
     public void onListingClick(int position) {
-        //do nothing for now...
+        book listingToBeDeleted = listing.get(position);
+        mFirestore.collection("favourites").document(listingToBeDeleted.getBookname() + "-" + FirebaseAuth.getInstance().getCurrentUser().getUid()).delete();
+        Toast.makeText(this, "Listing removed", Toast.LENGTH_SHORT).show();
+        listing.remove(position);
+        showListings();
     }
 }

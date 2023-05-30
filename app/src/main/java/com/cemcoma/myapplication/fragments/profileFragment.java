@@ -24,6 +24,8 @@ import com.cemcoma.myapplication.activities.favouritesActivity;
 import com.cemcoma.myapplication.activities.userListingsActivity;
 import com.cemcoma.myapplication.activities.userLoginActivity;
 import com.cemcoma.myapplication.callback;
+import com.cemcoma.myapplication.favourites.book;
+import com.cemcoma.myapplication.favourites.bookAdapter;
 import com.cemcoma.myapplication.listings.listingMp;
 import com.cemcoma.myapplication.listings.mpAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +50,8 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
     protected FirebaseUser authUser;
     protected User user;
     private List<listingMp> listing;
-    private RecyclerView recyclerView;
+    private List<book> listingBook;
+    private RecyclerView recyclerView, recyclerViewBook;
 
 
 
@@ -69,8 +72,11 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
         favoritesView = v.findViewById(R.id.favoritesTextView);
         recyclerView = v.findViewById(R.id.profileRecylerViewListing);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewBook = v.findViewById(R.id.recylerviewBook);
+        recyclerViewBook.setLayoutManager(new LinearLayoutManager(getContext()));
 
         listing = new ArrayList<>();
+        listingBook = new ArrayList<>();
         listingView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,17 +117,26 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
     }
 
     private void initializeFavorites(String username) {
-         FirebaseFirestore.getInstance().collection("favourites").document(FirebaseAuth.getInstance().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-             @Override
-             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                 //TODO: do a favourites class
-             }
-         });
+
+        Query query = FirebaseFirestore.getInstance().collection("favourites").limit(5);
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(QueryDocumentSnapshot docSnap : queryDocumentSnapshots) {
+                    String bookname = docSnap.get("bookname").toString();
+                    String author = docSnap.get("author").toString();
+                    String url = docSnap.get("imageString").toString();
+
+                    listingBook.add(new book(bookname, author, url));
+                }
+                showListingsFavourites();
+            }
+        });
 
     }
 
     private void initializeListings(String username) {
-        Query query = FirebaseFirestore.getInstance().collection("mp-listings").whereEqualTo("sellername", username).limit(1);
+        Query query = FirebaseFirestore.getInstance().collection("mp-listings").whereEqualTo("sellername", username).limit(5);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -163,6 +178,10 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
     }
     private void showListingsMp() {
         recyclerView.setAdapter(new mpAdapter(this.getContext(), listing, this));
+    }
+
+    private void showListingsFavourites() {
+        recyclerViewBook.setAdapter(new bookAdapter(this.getContext(), listingBook, this));
     }
 
     @Override

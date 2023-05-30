@@ -7,28 +7,29 @@
 
     <ImageView
         android:id="@+id/bookimage"
-        android:layout_width="145dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
         android:layout_centerVertical="true" />
+
     <TextView
         android:id="@+id/booknameTextViewBook"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="150dp"
-        android:textSize="22sp"
+        android:layout_marginStart="105dp"
         android:text=""
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/authorTextViewBook"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_marginStart="105dp"
         android:layout_marginTop="50dp"
-        android:layout_marginStart="150dp"
-        android:textSize="15sp"
         android:text=""
         android:textColor="@color/black"
-        />
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="150dp"
         android:background="@color/black"
         />
 
