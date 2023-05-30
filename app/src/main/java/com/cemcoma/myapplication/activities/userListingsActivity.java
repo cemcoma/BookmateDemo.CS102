@@ -102,7 +102,7 @@ public class userListingsActivity extends AppCompatActivity implements Recylervi
                 Toast.makeText(getApplicationContext(), "Listing removed", Toast.LENGTH_SHORT).show();
             }
         }));
-        System.out.println("damn");
+
     }
 
     private void showListings() {

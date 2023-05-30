@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,25 +18,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cemcoma.myapplication.R;
+import com.cemcoma.myapplication.RecylerviewInterface;
 import com.cemcoma.myapplication.User;
 import com.cemcoma.myapplication.activities.userListingsActivity;
 import com.cemcoma.myapplication.activities.userLoginActivity;
+import com.cemcoma.myapplication.callback;
+import com.cemcoma.myapplication.listings.listingMp;
+import com.cemcoma.myapplication.listings.mpAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class profileFragment extends Fragment {
+
+public class profileFragment extends Fragment implements RecylerviewInterface{
     private ImageView pImage;
     protected TextView ratingView, usernameView, preferencesView, listingView, favoritesView;
     protected FirebaseAuth auth;
     protected Button button;
     protected FirebaseUser authUser;
     protected User user;
+    private List<listingMp> listing;
+    private RecyclerView recyclerView;
 
 
 
@@ -53,7 +66,10 @@ public class profileFragment extends Fragment {
         preferencesView = v.findViewById(R.id.preferencesTextView);
         listingView = v.findViewById(R.id.listingsTextView);
         favoritesView = v.findViewById(R.id.favoritesTextView);
+        recyclerView = v.findViewById(R.id.profileRecylerViewListing);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        listing = new ArrayList<>();
         listingView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,16 +88,55 @@ public class profileFragment extends Fragment {
             }
         });
 
-        initializeValues();
+        initializeValues(new callback() {
+            @Override
+            public void callbackString(String callbackString) {
+                initializeListings(callbackString);
+                initializeFavorites(callbackString);
+            }
+        });
+
+
         return v;
     }
 
-    private void initializeValues() {
+    private void initializeFavorites(String username) {
+         FirebaseFirestore.getInstance().collection("favourites").document(FirebaseAuth.getInstance().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+             @Override
+             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                 //TODO: do a favourites class
+             }
+         });
+
+    }
+
+    private void initializeListings(String username) {
+        Query query = FirebaseFirestore.getInstance().collection("mp-listings").whereEqualTo("sellername", username).limit(1);
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(QueryDocumentSnapshot docSnap : queryDocumentSnapshots) {
+                    String bookname = docSnap.get("name").toString();
+                    String author = docSnap.get("author").toString();
+                    String sellername = docSnap.get("sellername").toString();
+                    int price = Integer.parseInt(docSnap.get("price").toString());
+                    double rating = Double.parseDouble(docSnap.get("rating").toString().substring(0,3));
+                    String url = docSnap.get("imageUrl").toString();
+
+                    listing.add(new listingMp(bookname, author, sellername, price, rating, url));
+                }
+                showListingsMp();
+            }
+        });
+    }
+
+    private void initializeValues(final callback callback) {
 
         FirebaseFirestore.getInstance().collection("users").document(authUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 usernameView.setText(documentSnapshot.get("username").toString());
+                callback.callbackString(documentSnapshot.get("username").toString());
 
                 if(!documentSnapshot.get("profileUrl").toString().equals("default")) Picasso.with(getContext()).load(documentSnapshot.get("profileUrl").toString()).fit().centerCrop().into(pImage);
                 int rating1 = Integer.parseInt(documentSnapshot.get("rating1").toString());
@@ -95,6 +150,13 @@ public class profileFragment extends Fragment {
             }
         });
 
+    }
+    private void showListingsMp() {
+        recyclerView.setAdapter(new mpAdapter(this.getContext(), listing, this));
+    }
 
+    @Override
+    public void onListingClick(int position) {
+        //do nothing...
     }
 }
