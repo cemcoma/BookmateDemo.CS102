@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.RecylerviewInterface;
 import com.cemcoma.myapplication.User;
 import com.cemcoma.myapplication.activities.favouritesActivity;
+import com.cemcoma.myapplication.activities.settingsActivity;
 import com.cemcoma.myapplication.activities.userListingsActivity;
 import com.cemcoma.myapplication.activities.userLoginActivity;
 import com.cemcoma.myapplication.callback;
@@ -54,12 +56,14 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
 
     protected TextView ratingView, usernameView, preferencesView, listingView, favoritesView;
     protected FirebaseAuth auth;
-    protected Button button;
+    protected ImageButton button;
     protected FirebaseUser authUser;
     protected User user;
     private List<listingMp> listing;
     private List<book> listingBook;
     private RecyclerView recyclerView, recyclerViewBook;
+
+    private FirebaseFirestore mFirestore;
 
 
 
@@ -67,7 +71,7 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         auth = FirebaseAuth.getInstance();
-        button = v.findViewById(R.id.button);
+        button = v.findViewById(R.id.logout);
         auth = FirebaseAuth.getInstance();
         authUser = auth.getCurrentUser();
         assert authUser != null;
@@ -108,8 +112,7 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent =  new Intent(getActivity(), userLoginActivity.class);
+                Intent intent =  new Intent(getActivity(), settingsActivity.class);
                 startActivity(intent);
             }
         });
@@ -182,6 +185,16 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
 
                 callback.callbackString(documentSnapshot.get("username").toString());
 
+                String result = "Favorite Genres: ";
+
+                for (Map.Entry<String , Boolean> m : user.getPreferences().entrySet()) {
+                    if (m.getValue()){
+                        result +=  m.getKey() + ", ";
+                    }
+                }
+                result = result.substring(0 , result.length() - 2);
+                preferencesView.setText("" + result);
+
                 if(!documentSnapshot.get("profileUrl").toString().equals("default")) Picasso.with(getContext()).load(documentSnapshot.get("profileUrl").toString()).fit().centerCrop().into(pImage);
                 int rating1 = Integer.parseInt(documentSnapshot.get("rating1").toString());
                 int rating2 = Integer.parseInt(documentSnapshot.get("rating2").toString());
@@ -208,4 +221,6 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
     public void onListingClick(int position) {
         //do nothing...
     }
+
+
 }

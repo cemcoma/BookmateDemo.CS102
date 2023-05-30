@@ -18,6 +18,9 @@
             android:name=".activities.visitorProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.settingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.addFavouritesActivity"
             android:exported="false" />
         <activity

@@ -50,7 +50,7 @@ public class User {
                 rating3 = Integer.parseInt(documentSnapshot.get("rating3").toString());
                 rating4 = Integer.parseInt(documentSnapshot.get("rating4").toString());
                 rating5 = Integer.parseInt(documentSnapshot.get("rating5").toString());
-                preferences = (HashMap<String , Boolean>) (documentSnapshot.get("preferences"));
+                preferences = (HashMap<String, Boolean>) documentSnapshot.get("preferences");
             }
         });
     }
@@ -88,7 +88,7 @@ public class User {
      * @param username
      * @param password
      */
-    public static void storeUser(FirebaseUser mUser, String username, String password , HashMap<String,Boolean> preferences) {
+    public static void storeUser(FirebaseUser mUser, String username, String password , HashMap<String , Boolean> preferences) {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         String UID = mUser.getUid();
         String email = mUser.getEmail();
