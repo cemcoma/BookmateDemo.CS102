@@ -118,6 +118,12 @@ public class chatFragment extends Fragment {
                                 //if (!mKullanıcı.getUID().equals(mUser.getUid()))
                                 mUserList.add(mKullanıcı);
                             }
+
+                            for (User user : mUserList) {
+                                if(user.getUID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                    mUserList.remove(user);
+                                }
+                            }
                             mRecycleView.addItemDecoration(new LinearDecoration(20, mUserList.size()));
                             mAdapter = new userAdapter(mUserList, v.getContext(), RefUser.getUID(), RefUser.getUsername(), RefUser.getProfileUrl());
                             mRecycleView.setAdapter(mAdapter);
