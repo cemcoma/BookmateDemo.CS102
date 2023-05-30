@@ -83,7 +83,7 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent =  new Intent(getActivity(), userListingsActivity.class);
+                Intent intent =  new Intent(getActivity(), userLoginActivity.class);
                 startActivity(intent);
             }
         });

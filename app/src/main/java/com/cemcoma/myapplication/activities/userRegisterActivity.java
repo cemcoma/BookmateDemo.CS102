@@ -130,7 +130,7 @@ public class userRegisterActivity extends AppCompatActivity {
             return;
         }
 
-        Intent intent = new Intent(userRegisterActivity.this, preferencesActivity.class);
+        Intent intent = new Intent(getApplicationContext(), preferencesActivity.class);
         intent.putExtra("user" , user);
         intent.putExtra("username" , editUsernameText.getText().toString());
         intent.putExtra("password" , editPasswordText.getText().toString());
