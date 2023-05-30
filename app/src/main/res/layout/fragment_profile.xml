@@ -67,11 +67,12 @@
 
     <TextView
         android:id="@+id/preferencesTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="159dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
         android:text="preferences"
-        app:layout_constraintEnd_toEndOf="@+id/usernameTextView"
-        app:layout_constraintStart_toStartOf="@+id/usernameTextView"
+        app:layout_constraintStart_toEndOf="@+id/profileImageView"
         app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
 
     <TextView

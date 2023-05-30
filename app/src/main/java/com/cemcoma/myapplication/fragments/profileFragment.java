@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,9 +29,11 @@ import com.cemcoma.myapplication.favourites.book;
 import com.cemcoma.myapplication.favourites.bookAdapter;
 import com.cemcoma.myapplication.listings.listingMp;
 import com.cemcoma.myapplication.listings.mpAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -39,11 +42,16 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class profileFragment extends Fragment implements RecylerviewInterface{
     private ImageView pImage;
+    private HashMap<String,Boolean> prefs;
+    private String UID;
+
     protected TextView ratingView, usernameView, preferencesView, listingView, favoritesView;
     protected FirebaseAuth auth;
     protected Button button;
@@ -64,19 +72,21 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
         authUser = auth.getCurrentUser();
         assert authUser != null;
         user = new User(authUser);
+        prefs = user.getPreferences();
+        UID = user.getUID();
         pImage = (ImageView) v.findViewById(R.id.profileImageView);
         ratingView = (TextView) v.findViewById(R.id.ratingView);
         usernameView = v.findViewById(R.id.usernameTextView);
-        preferencesView = v.findViewById(R.id.preferencesTextView);
+        preferencesView= v.findViewById(R.id.preferencesTextView);
         listingView = v.findViewById(R.id.listingsTextView);
         favoritesView = v.findViewById(R.id.favoritesTextView);
         recyclerView = v.findViewById(R.id.profileRecylerViewListing);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewBook = v.findViewById(R.id.recylerviewBook);
         recyclerViewBook.setLayoutManager(new LinearLayoutManager(getContext()));
-
         listing = new ArrayList<>();
         listingBook = new ArrayList<>();
+
         listingView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,6 +171,15 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 usernameView.setText(documentSnapshot.get("username").toString());
+                prefs = (HashMap<String, Boolean>) documentSnapshot.get("preferences");
+                String r = "Favorite Genres:  ";
+                for (String s : prefs.keySet()) {
+                    if (prefs.get(s)) {
+                        r = r + s + ", ";
+                    }
+                }
+                preferencesView.setText(r.substring(0,r.length()-2));
+
                 callback.callbackString(documentSnapshot.get("username").toString());
 
                 if(!documentSnapshot.get("profileUrl").toString().equals("default")) Picasso.with(getContext()).load(documentSnapshot.get("profileUrl").toString()).fit().centerCrop().into(pImage);
@@ -183,6 +202,7 @@ public class profileFragment extends Fragment implements RecylerviewInterface{
     private void showListingsFavourites() {
         recyclerViewBook.setAdapter(new bookAdapter(this.getContext(), listingBook, this));
     }
+
 
     @Override
     public void onListingClick(int position) {

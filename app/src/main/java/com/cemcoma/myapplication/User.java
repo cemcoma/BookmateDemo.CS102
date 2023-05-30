@@ -87,7 +87,7 @@ public class User {
      * @param username
      * @param password
      */
-    public static void storeUser(FirebaseUser mUser, String username, String password , HashMap preferences) {
+    public static void storeUser(FirebaseUser mUser, String username, String password , HashMap<String,Boolean> preferences) {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         String UID = mUser.getUid();
         String email = mUser.getEmail();
