@@ -107,7 +107,7 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userHolder> {
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()){
                                 chatIntent = new Intent(mContext, ChatActivity.class);
-                                chatIntent.putExtra("channelID", documentSnapshot.getData().get("channelID").toString());
+                                chatIntent.putExtra("channelID", documentSnapshot.getData().get("kanalID").toString());
                                 chatIntent.putExtra("targetProfile", mUserList.get(kpos).getProfileUrl());
                                 chatIntent.putExtra("targetID", mUserList.get(kpos).getUID());
                                 chatIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
