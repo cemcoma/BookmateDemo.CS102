@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.profileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:id="@+id/usernameTextViewV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="56dp"
+        android:text="Username"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/profileImageViewV"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profileImageViewV"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="32dp"
+
+        android:layout_marginTop="16dp"
+        android:background="@color/loginBG"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageView3V"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:src="@drawable/ic_star"
+        app:layout_constraintEnd_toEndOf="@+id/profileImageViewV"
+        app:layout_constraintStart_toStartOf="@+id/profileImageViewV"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageViewV" />
+
+    <TextView
+        android:id="@+id/ratingViewV"
+        android:layout_width="37dp"
+        android:layout_height="39dp"
+        android:text="0.5"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/profileImageViewV"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView3V"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageViewV" />
+
+    <TextView
+        android:id="@+id/favoritesTextViewV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:text="Favorites"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/profileImageViewV"
+        app:layout_constraintStart_toStartOf="@+id/profileImageViewV"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3V" />
+
+    <TextView
+        android:id="@+id/preferencesTextViewV"
+        android:layout_width="159dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:text="preferences"
+        app:layout_constraintStart_toEndOf="@+id/profileImageViewV"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextViewV" />
+
+    <TextView
+        android:id="@+id/listingsTextViewV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:clickable="false"
+        android:text="Listings"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/favoritesTextViewV"
+        app:layout_constraintTop_toBottomOf="@+id/favoritesTextViewV" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profileRecylerViewListingV"
+        android:layout_width="match_parent"
+        android:layout_height="215dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listingsTextViewV" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerviewBookV"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        app:layout_constraintBottom_toTopOf="@+id/listingsTextViewV"
+        app:layout_constraintTop_toBottomOf="@+id/favoritesTextViewV"
+        tools:layout_editor_absoluteX="211dp" />
+
+    <ImageButton
+        android:id="@+id/finishButton"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="40dp"
+        android:src="@drawable/baseline_arrow_back"
+        app:layout_constraintStart_toStartOf="@+id/profileRecylerViewListingV"
+        app:layout_constraintTop_toBottomOf="@+id/profileRecylerViewListingV" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/baseline_message"
+        app:layout_constraintBottom_toBottomOf="@+id/finishButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/finishButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

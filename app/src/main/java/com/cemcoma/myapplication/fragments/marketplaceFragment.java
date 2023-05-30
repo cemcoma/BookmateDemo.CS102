@@ -1,6 +1,7 @@
 package com.cemcoma.myapplication.fragments;
 
 import com.cemcoma.myapplication.RecylerviewInterface;
+import com.cemcoma.myapplication.activities.visitorProfileActivity;
 import com.cemcoma.myapplication.listings.*;
 import com.cemcoma.myapplication.activities.addListingActivityMp;
 
@@ -126,13 +127,9 @@ public class marketplaceFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onListingClick(int position) {
-        profileFragment profileFragment = new profileFragment();
-
-        //TODO: position'a göre user alacaksın, onun profiline yönlendireceksin ama şuan olmaz çünkü kimsenin profili yok
-
-        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame,profileFragment);
-        transaction.commit();
+        Intent intent = new Intent(this.getContext(), visitorProfileActivity.class);
+        intent.putExtra("username", listing.get(position).getSellername());
+        startActivity(intent);
     }
     private void searchUnsuccessfull() {
         Toast.makeText(this.getContext(), "Nothing Found!", Toast.LENGTH_SHORT).show();
