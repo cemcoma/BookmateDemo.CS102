@@ -136,6 +136,7 @@ public class ChatActivity extends AppCompatActivity {
                     }
                     chatAdapter = new chatAdapter(mChatList, ChatActivity.this, mUser.getUid(), StargetProfile);
                     mRecycleView.setAdapter(chatAdapter);
+                    mRecycleView.scrollToPosition(mChatList.size() - 1);
                 }
 
             }

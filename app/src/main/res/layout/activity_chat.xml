@@ -60,12 +60,13 @@
     </Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
         android:id="@+id/chat_activity_recycleView"
-        android:scrollbars="none"
-        android:layout_above="@+id/chat_activity_relaBottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/chat_activity_ToolBar"
-        android:layout_height="match_parent"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:scrollbars="none" />
 
     <RelativeLayout
         android:layout_width="match_parent"
