@@ -253,7 +253,7 @@ public class visitorProfileActivity extends AppCompatActivity implements Recyler
                 if (!TextUtils.isEmpty(textMessage)){
                     String channelID = UUID.randomUUID().toString();
 
-                    MessageRequest messageRequest = new MessageRequest(channelID, UIDVisiting, username, visitingUser.getProfileUrl());
+                    MessageRequest messageRequest = new MessageRequest(channelID, UIDVisiting, visitingUser.getUsername(), visitingUser.getProfileUrl());
                     FirebaseFirestore.getInstance().collection("MessageRequests").document(user.getUID())
                             .collection("requests").document(UIDVisiting).set(messageRequest)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
