@@ -270,7 +270,7 @@ public class visitorProfileActivity extends AppCompatActivity implements Recyler
                                         mData.put("docId", messageDocID);
 
                                         HashMap<String, Object> bData = new HashMap<>();
-                                        bData.put("hasGivenRatingReciever", false);
+                                        bData.put("hasGivenRatingReceiver", false);
                                         bData.put("receiver", user.getUID());
                                         bData.put("hasGivenRatingSender", false);
                                         bData.put("sender", UIDVisiting);

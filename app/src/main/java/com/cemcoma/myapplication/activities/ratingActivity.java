@@ -42,11 +42,11 @@ public class ratingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String whichRating = "rating1";
-                if (ratingBar.getNumStars() == 1) whichRating = "rating1";
-                else if(ratingBar.getNumStars() == 2) whichRating = "rating2";
-                else if(ratingBar.getNumStars() == 3) whichRating = "rating3";
-                else if(ratingBar.getNumStars() == 4) whichRating = "rating4";
-                else if(ratingBar.getNumStars() == 5) whichRating = "rating5";
+                if (ratingBar.getRating() == 1) whichRating = "rating1";
+                else if(ratingBar.getRating()  == 2) whichRating = "rating2";
+                else if(ratingBar.getRating()  == 3) whichRating = "rating3";
+                else if(ratingBar.getRating()  == 4) whichRating = "rating4";
+                else if(ratingBar.getRating()  == 5) whichRating = "rating5";
 
                 FirebaseFirestore.getInstance().collection("users").document(targetID).update(whichRating, FieldValue.increment(1));
                 if(who.equals("receiver")) {
