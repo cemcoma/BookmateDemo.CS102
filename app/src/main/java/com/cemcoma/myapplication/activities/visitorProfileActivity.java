@@ -269,7 +269,13 @@ public class visitorProfileActivity extends AppCompatActivity implements Recyler
                                         String messageDocID = UUID.randomUUID().toString();
                                         mData.put("docId", messageDocID);
 
+                                        HashMap<String, Object> bData = new HashMap<>();
+                                        bData.put("hasGivenRatingReciever", false);
+                                        bData.put("receiver", user.getUID());
+                                        bData.put("hasGivenRatingSender", false);
+                                        bData.put("sender", UIDVisiting);
 
+                                        FirebaseFirestore.getInstance().collection("chatChannels").document(channelID).set(bData);
 
                                         FirebaseFirestore.getInstance().collection("chatChannels").document(channelID)
                                                 .collection("Messages").document(messageDocID).set(mData)

@@ -6,20 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cemcoma.myapplication.R;
 import com.cemcoma.myapplication.User;
+import com.cemcoma.myapplication.listings.MessageRequest;
 import com.cemcoma.myapplication.listings.chat;
 import com.cemcoma.myapplication.listings.chatAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,7 +46,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatActivity extends AppCompatActivity {
     private FirebaseUser mUser;
-
+    private Button ratingButton;
     private RecyclerView mRecycleView;
     private EditText editMessage;
     private String txtMessage, DocID;
@@ -64,7 +69,7 @@ public class ChatActivity extends AppCompatActivity {
         editMessage = findViewById(R.id.chat_activity_editMessage);
         targetProfile = findViewById(R.id.chat_activity_imgTargetProfie);
         targetName = findViewById(R.id.chat_activity_txtTargetName);
-
+        ratingButton = findViewById(R.id.ratingButton);
         mFireStore = FirebaseFirestore.getInstance();
         receivedIntent = getIntent();
         targetID = receivedIntent.getStringExtra("targetID");
@@ -164,9 +169,36 @@ public class ChatActivity extends AppCompatActivity {
         }else
             Toast.makeText(ChatActivity.this, "Write something to send a message.", Toast.LENGTH_SHORT).show();
 
+        mFireStore.collection("chatChannels").document(channelID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (mUser.getUid().equals(documentSnapshot.get("receiver").toString())){
+                    boolean chk = (boolean) documentSnapshot.get("hasGivenRatingReceiver");
+                    if(!chk) showRatingDialog("receiver");
+                } else if(mUser.getUid().equals(documentSnapshot.get("sender").toString())){
+                    boolean chk = (boolean) documentSnapshot.get("hasGivenRatingSender");
+                    if(!chk) showRatingDialog("sender");
+                }
+            }
+        });
 
     }
 
+    private void showRatingDialog(String who) {
+        ratingButton.setVisibility(Button.VISIBLE);
+        ratingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatActivity.this, ratingActivity.class);
+                intent.putExtra("who",who);
+                intent.putExtra("targetID", targetID);
+                intent.putExtra("channelID",channelID);
+                startActivity(intent);
+                ratingButton.setVisibility(Button.INVISIBLE);
+            }
+
+        });
+    }
     public void btnCloseChat(View v){
         finish();
     }

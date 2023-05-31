@@ -97,4 +97,16 @@
             android:layout_height="45dp"/>
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/ratingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="87dp"
+        android:text="Give a rating"
+        android:textSize="10sp"
+        android:visibility="invisible" />
+
 </RelativeLayout>

@@ -172,8 +172,15 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.userHolder> {
                                         mData.put("MessageDate", FieldValue.serverTimestamp());
                                         mData.put("docId", messageDocID);
 
+                                        HashMap<String, Object> bData = new HashMap<>();
+                                        bData.put("hasGivenRatingReceiver", false);
+                                        bData.put("receiver", user.getUID());
+                                        bData.put("hasGivenRatingSender", false);
+                                        bData.put("sender", mUID);
 
                                         messageDocID = UUID.randomUUID().toString();
+                                        mFireStore.collection("chatChannels").document(channelID).set(bData);
+
                                         mFireStore.collection("chatChannels").document(channelID)
                                                 .collection("Messages").document(messageDocID).set(mData)
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
